@@ -18,6 +18,8 @@ public class TripsController : ControllerBase
         _tripService = tripService;
     }
 
+    // ═══════════════════ TRIPS ═══════════════════
+
     /// <summary>
     /// Publica un nuevo viaje. El DriverUid y DriverName se extraen del token.
     /// </summary>
@@ -47,7 +49,6 @@ public class TripsController : ControllerBase
 
     /// <summary>
     /// Busca viajes abiertos con asientos disponibles.
-    /// Soporta filtros por zona y fecha de salida.
     /// </summary>
     [HttpGet("search")]
     public async Task<ActionResult<PagedResultDto<TripDto>>> Search(
@@ -82,6 +83,121 @@ public class TripsController : ControllerBase
         return Ok(trip);
     }
 
+    /// <summary>
+    /// Actualiza un viaje existente (solo el conductor, solo si está open).
+    /// </summary>
+    [HttpPut("{id:guid}")]
+    [Authorize]
+    public async Task<ActionResult<TripDto>> UpdateTrip(
+        Guid id, [FromBody] UpdateTripDto dto)
+    {
+        var uid = GetFirebaseUid();
+        var trip = await _tripService.UpdateTripAsync(id, uid, dto);
+        return Ok(trip);
+    }
+
+    /// <summary>
+    /// Elimina un viaje (solo el conductor, solo si está open).
+    /// </summary>
+    [HttpDelete("{id:guid}")]
+    [Authorize]
+    public async Task<IActionResult> DeleteTrip(Guid id)
+    {
+        var uid = GetFirebaseUid();
+        await _tripService.DeleteTripAsync(id, uid);
+        return NoContent();
+    }
+
+    // ═══════════════════ ROUTES (Admin) ═══════════════════
+
+    /// <summary>
+    /// Lista todas las rutas predefinidas.
+    /// </summary>
+    [HttpGet("routes")]
+    public async Task<ActionResult<List<TripRouteDto>>> GetRoutes()
+    {
+        var routes = await _tripService.GetAllRoutesAsync();
+        return Ok(routes);
+    }
+
+    /// <summary>
+    /// Crea una nueva ruta predefinida.
+    /// </summary>
+    [HttpPost("routes")]
+    [Authorize]
+    public async Task<ActionResult<TripRouteDto>> CreateRoute([FromBody] NameRequest request)
+    {
+        var route = await _tripService.CreateRouteAsync(request.Name);
+        return Created($"api/trips/routes/{route.Id}", route);
+    }
+
+    /// <summary>
+    /// Actualiza una ruta predefinida.
+    /// </summary>
+    [HttpPut("routes/{id:guid}")]
+    [Authorize]
+    public async Task<ActionResult<TripRouteDto>> UpdateRoute(Guid id, [FromBody] NameRequest request)
+    {
+        var route = await _tripService.UpdateRouteAsync(id, request.Name);
+        return Ok(route);
+    }
+
+    /// <summary>
+    /// Elimina una ruta predefinida.
+    /// </summary>
+    [HttpDelete("routes/{id:guid}")]
+    [Authorize]
+    public async Task<IActionResult> DeleteRoute(Guid id)
+    {
+        await _tripService.DeleteRouteAsync(id);
+        return NoContent();
+    }
+
+    // ═══════════════════ RULES (Admin) ═══════════════════
+
+    /// <summary>
+    /// Lista todas las reglas predefinidas.
+    /// </summary>
+    [HttpGet("rules")]
+    public async Task<ActionResult<List<TripRuleDto>>> GetRules()
+    {
+        var rules = await _tripService.GetAllRulesAsync();
+        return Ok(rules);
+    }
+
+    /// <summary>
+    /// Crea una nueva regla predefinida.
+    /// </summary>
+    [HttpPost("rules")]
+    [Authorize]
+    public async Task<ActionResult<TripRuleDto>> CreateRule([FromBody] TextRequest request)
+    {
+        var rule = await _tripService.CreateRuleAsync(request.Text);
+        return Created($"api/trips/rules/{rule.Id}", rule);
+    }
+
+    /// <summary>
+    /// Actualiza una regla predefinida.
+    /// </summary>
+    [HttpPut("rules/{id:guid}")]
+    [Authorize]
+    public async Task<ActionResult<TripRuleDto>> UpdateRule(Guid id, [FromBody] TextRequest request)
+    {
+        var rule = await _tripService.UpdateRuleAsync(id, request.Text);
+        return Ok(rule);
+    }
+
+    /// <summary>
+    /// Elimina una regla predefinida.
+    /// </summary>
+    [HttpDelete("rules/{id:guid}")]
+    [Authorize]
+    public async Task<IActionResult> DeleteRule(Guid id)
+    {
+        await _tripService.DeleteRuleAsync(id);
+        return NoContent();
+    }
+
     // ──── Helpers ────
     private string GetFirebaseUid()
         => User.FindFirstValue(ClaimTypes.NameIdentifier)
@@ -94,7 +210,19 @@ public class TripsController : ControllerBase
            ?? "Unknown";
 }
 
+// ──── Request models ────
+
 public class UpdateTripStatusRequest
 {
     public string Status { get; set; } = null!;
+}
+
+public class NameRequest
+{
+    public string Name { get; set; } = null!;
+}
+
+public class TextRequest
+{
+    public string Text { get; set; } = null!;
 }

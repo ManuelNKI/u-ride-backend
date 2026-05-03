@@ -12,6 +12,8 @@ public interface IUnitOfWork : IDisposable
     IReviewRepository Reviews { get; }
     IReportRepository Reports { get; }
     INotificationRepository Notifications { get; }
+    ITripRouteRepository TripRoutes { get; }
+    ITripRuleRepository TripRules { get; }
 
     Task<int> SaveChangesAsync();
 }

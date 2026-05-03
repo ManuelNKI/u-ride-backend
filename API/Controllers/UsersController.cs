@@ -76,6 +76,44 @@ public class UsersController : ControllerBase
         return Ok(profile);
     }
 
+    // ═══════════════════ ADMIN ═══════════════════
+
+    /// <summary>
+    /// [Admin] Lista todos los usuarios con paginación.
+    /// </summary>
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> GetAllUsers(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 50)
+    {
+        var result = await _userService.GetAllUsersAsync(page, pageSize);
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// [Admin] Actualiza el perfil de cualquier usuario.
+    /// </summary>
+    [HttpPut("{uid}")]
+    [Authorize]
+    public async Task<ActionResult<UserProfileDto>> AdminUpdateProfile(
+        string uid, [FromBody] SyncUserDto dto)
+    {
+        var profile = await _userService.AdminUpdateProfileAsync(uid, dto);
+        return Ok(profile);
+    }
+
+    /// <summary>
+    /// [Admin] Activa/desactiva un usuario.
+    /// </summary>
+    [HttpPost("{uid}/toggle-disabled")]
+    [Authorize]
+    public async Task<ActionResult<UserProfileDto>> ToggleDisabled(string uid)
+    {
+        var profile = await _userService.ToggleDisabledAsync(uid);
+        return Ok(profile);
+    }
+
     /// <summary>
     /// [Admin] Suspende a un usuario hasta una fecha dada.
     /// </summary>

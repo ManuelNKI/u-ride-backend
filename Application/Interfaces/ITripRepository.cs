@@ -19,4 +19,5 @@ public interface ITripRepository
     Task<List<Trip>> GetByDriverUidAsync(string driverUid);
     Task AddAsync(Trip trip);
     void Update(Trip trip);
+    void Delete(Trip trip);
 }

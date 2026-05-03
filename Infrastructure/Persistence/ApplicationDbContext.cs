@@ -20,6 +20,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Review> Reviews => Set<Review>();
     public DbSet<Report> Reports => Set<Report>();
     public DbSet<Notification> Notifications => Set<Notification>();
+    public DbSet<TripRoute> TripRoutes => Set<TripRoute>();
+    public DbSet<TripRule> TripRules => Set<TripRule>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

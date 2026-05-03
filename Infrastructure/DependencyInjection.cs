@@ -31,6 +31,8 @@ public static class DependencyInjection
         services.AddScoped<IReviewRepository, ReviewRepository>();
         services.AddScoped<IReportRepository, ReportRepository>();
         services.AddScoped<INotificationRepository, NotificationRepository>();
+        services.AddScoped<ITripRouteRepository, TripRouteRepository>();
+        services.AddScoped<ITripRuleRepository, TripRuleRepository>();
 
         // ──── Unit of Work ────
         services.AddScoped<IUnitOfWork, UnitOfWork>();

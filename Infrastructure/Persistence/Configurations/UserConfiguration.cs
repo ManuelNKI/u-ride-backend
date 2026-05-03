@@ -18,7 +18,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(256);
 
         builder.Property(u => u.DisplayName)
-            .IsRequired()
             .HasMaxLength(200);
 
         builder.Property(u => u.Career).HasMaxLength(150);

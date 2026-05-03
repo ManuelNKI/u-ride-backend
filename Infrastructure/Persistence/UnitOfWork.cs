@@ -16,6 +16,8 @@ public class UnitOfWork : IUnitOfWork
     public IReviewRepository Reviews { get; }
     public IReportRepository Reports { get; }
     public INotificationRepository Notifications { get; }
+    public ITripRouteRepository TripRoutes { get; }
+    public ITripRuleRepository TripRules { get; }
 
     public UnitOfWork(ApplicationDbContext context)
     {
@@ -26,6 +28,8 @@ public class UnitOfWork : IUnitOfWork
         Reviews = new ReviewRepository(context);
         Reports = new ReportRepository(context);
         Notifications = new NotificationRepository(context);
+        TripRoutes = new TripRouteRepository(context);
+        TripRules = new TripRuleRepository(context);
     }
 
     public async Task<int> SaveChangesAsync()

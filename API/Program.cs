@@ -34,7 +34,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = $"https://securetoken.google.com/{firebaseProjectId}",
             ValidateAudience = true,
             ValidAudience = firebaseProjectId,
-            ValidateLifetime = true
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromMinutes(5)
+        };
+
+        // Manejar errores de autenticación de forma segura
+        options.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                var logger = context.HttpContext.RequestServices
+                    .GetRequiredService<ILoggerFactory>()
+                    .CreateLogger("JwtAuth");
+                logger.LogWarning(context.Exception,
+                    "JWT authentication failed for {Path}", context.Request.Path);
+                return Task.CompletedTask;
+            }
         };
     });
 
@@ -91,6 +106,9 @@ builder.Services.AddCors(options =>
 // ───────────────────────────── APP ─────────────────────────────
 
 var app = builder.Build();
+
+// ──── Seed data (rutas y reglas predefinidas) ────
+await Infrastructure.DbSeeder.SeedAsync(app.Services);
 
 // Middleware global de excepciones (primero en el pipeline)
 app.UseMiddleware<GlobalExceptionMiddleware>();

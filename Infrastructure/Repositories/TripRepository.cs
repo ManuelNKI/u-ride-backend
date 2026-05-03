@@ -58,6 +58,9 @@ public class TripRepository : ITripRepository
     public void Update(Trip trip)
         => _context.Trips.Update(trip);
 
+    public void Delete(Trip trip)
+        => _context.Trips.Remove(trip);
+
     // ──── Helper privado para construir la query de búsqueda ────
     private IQueryable<Trip> BuildSearchQuery(
         string? originZone,

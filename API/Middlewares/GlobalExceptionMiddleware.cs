@@ -26,7 +26,20 @@ public class GlobalExceptionMiddleware
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unhandled exception occurred.");
+            _logger.LogError(ex, "Unhandled exception occurred for {Method} {Path}",
+                context.Request.Method, context.Request.Path);
+
+            // Si la respuesta ya empezó a enviarse, no podemos escribir
+            // un cuerpo JSON de error. Solo logueamos y re-lanzamos
+            // para que Kestrel cierre la conexión limpiamente.
+            if (context.Response.HasStarted)
+            {
+                _logger.LogWarning(
+                    "Response already started — cannot write error body for {Path}",
+                    context.Request.Path);
+                return;
+            }
+
             await HandleExceptionAsync(context, ex);
         }
     }
