@@ -67,16 +67,16 @@ public class UserService : IUserService
         return user is null ? null : MapToDto(user);
     }
 
-    public async Task<UserProfileDto> UpdateProfileAsync(string firebaseUid, SyncUserDto dto)
+    public async Task<UserProfileDto> UpdateProfileAsync(string firebaseUid, UpdateProfileDto dto)
     {
         var user = await _uow.Users.GetByUidAsync(firebaseUid)
             ?? throw new KeyNotFoundException($"User {firebaseUid} not found.");
 
-        user.DisplayName = dto.DisplayName;
-        user.Career = dto.Career;
-        user.Zone = dto.Zone;
-        user.Phone = dto.Phone;
-        user.PhotoUrl = dto.PhotoUrl;
+        if (!string.IsNullOrWhiteSpace(dto.DisplayName)) user.DisplayName = dto.DisplayName;
+        if (dto.Career is not null) user.Career = dto.Career;
+        if (dto.Zone is not null) user.Zone = dto.Zone;
+        if (dto.Phone is not null) user.Phone = dto.Phone;
+        if (dto.PhotoUrl is not null) user.PhotoUrl = dto.PhotoUrl;
         _uow.Users.Update(user);
 
         await _uow.SaveChangesAsync();
@@ -109,7 +109,7 @@ public class UserService : IUserService
         };
     }
 
-    public async Task<UserProfileDto> AdminUpdateProfileAsync(string firebaseUid, SyncUserDto dto)
+    public async Task<UserProfileDto> AdminUpdateProfileAsync(string firebaseUid, UpdateProfileDto dto)
     {
         var user = await _uow.Users.GetByUidAsync(firebaseUid)
             ?? throw new KeyNotFoundException($"User {firebaseUid} not found.");
@@ -118,6 +118,7 @@ public class UserService : IUserService
         if (dto.Career is not null) user.Career = dto.Career;
         if (dto.Zone is not null) user.Zone = dto.Zone;
         if (dto.Phone is not null) user.Phone = dto.Phone;
+        if (dto.PhotoUrl is not null) user.PhotoUrl = dto.PhotoUrl;
         _uow.Users.Update(user);
 
         await _uow.SaveChangesAsync();
