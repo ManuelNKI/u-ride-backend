@@ -1,2 +1,10 @@
 .git
 .vs
+bin/
+obj/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+**/appsettings.Development.json
+**/appsettings.json
