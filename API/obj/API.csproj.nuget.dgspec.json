@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\API\\API.csproj": {}
+    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\API\\API.csproj": {
+    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\API\\API.csproj",
+        "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Cristian Jurado\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\API\\obj\\",
+        "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,11 +32,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Application\\Application.csproj"
+              "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Application\\Application.csproj"
               },
-              "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -95,14 +95,14 @@
         }
       }
     },
-    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Application\\Application.csproj": {
+    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Application\\Application.csproj",
+        "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\Cristian Jurado\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Application\\obj\\",
+        "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -123,8 +123,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Domain\\Domain.csproj"
+              "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Domain\\Domain.csproj"
               }
             }
           }
@@ -164,14 +164,14 @@
         }
       }
     },
-    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Domain\\Domain.csproj": {
+    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Cristian Jurado\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -229,14 +229,14 @@
         }
       }
     },
-    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Cristian Jurado\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -257,8 +257,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Application\\Application.csproj"
+              "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Application\\Application.csproj"
               }
             }
           }

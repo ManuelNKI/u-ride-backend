@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UvS2r9HxidE=",
+  "dgSpecHash": "NrKVp57OGCg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\u-ride\\u-ride-backend\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\GESTION E IMPLANTACIÓN DE SOFWARE\\Primera Entrega\\u-ride-backend\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Cristian Jurado\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Cristian Jurado\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
