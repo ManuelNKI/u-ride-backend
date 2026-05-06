@@ -33,3 +33,15 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE S
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\u-ride\u-ride-backend\Domain\obj\Debug\net8.0\refint\Domain.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\u-ride\u-ride-backend\Domain\obj\Debug\net8.0\Domain.pdb
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\u-ride\u-ride-backend\Domain\obj\Debug\net8.0\ref\Domain.dll
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\bin\Debug\net8.0\Domain.dll
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\bin\Debug\net8.0\Domain.pdb
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.dll
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.pdb
+C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\ref\Domain.dll
