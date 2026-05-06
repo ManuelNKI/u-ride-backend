@@ -45,3 +45,4 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE S
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\refint\Domain.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.pdb
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\ref\Domain.dll
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\obj\Debug\net8.0\Domain.sourcelink.json

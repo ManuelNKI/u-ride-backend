@@ -612,3 +612,5 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE S
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\API\obj\Debug\net8.0\API.pdb
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\API\obj\Debug\net8.0\ref\API.dll
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\obj\Debug\net8.0\API.sourcelink.json
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\bin\Debug\net8.0\package-lock.json
