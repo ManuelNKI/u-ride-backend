@@ -69,7 +69,7 @@ public class UsersController : ControllerBase
     /// </summary>
     [HttpPut("me")]
     [Authorize]
-    public async Task<ActionResult<UserProfileDto>> UpdateProfile([FromBody] SyncUserDto dto)
+    public async Task<ActionResult<UserProfileDto>> UpdateProfile([FromBody] UpdateProfileDto dto)
     {
         var uid = GetFirebaseUid();
         var profile = await _userService.UpdateProfileAsync(uid, dto);
@@ -97,7 +97,7 @@ public class UsersController : ControllerBase
     [HttpPut("{uid}")]
     [Authorize]
     public async Task<ActionResult<UserProfileDto>> AdminUpdateProfile(
-        string uid, [FromBody] SyncUserDto dto)
+        string uid, [FromBody] UpdateProfileDto dto)
     {
         var profile = await _userService.AdminUpdateProfileAsync(uid, dto);
         return Ok(profile);
