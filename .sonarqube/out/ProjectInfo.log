@@ -1,0 +1,29 @@
+Product projects
+---------------------------------------
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Domain.csproj
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Application\Application.csproj
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Infrastructure\Infrastructure.csproj
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\API.csproj
+
+
+Test projects
+---------------------------------------
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\Application.Tests\Application.Tests.csproj
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\API.IntegrationTests\API.IntegrationTests.csproj
+
+
+Invalid projects
+---------------------------------------
+{none}
+
+
+Skipped projects
+---------------------------------------
+{none}
+
+
+Excluded projects
+---------------------------------------
+{none}
+
+

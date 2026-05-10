@@ -1,0 +1,8 @@
+﻿C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\API.IntegrationTests\UserControllerIntegrationTests.cs
+C:\Users\ramir\.nuget\packages\microsoft.net.test.sdk\18.5.1\build\net8.0\Microsoft.NET.Test.Sdk.Program.cs
+C:\Users\ramir\.nuget\packages\microsoft.testplatform.testhost\18.5.1\build\net8.0\x64\testhost.exe
+C:\Users\ramir\.nuget\packages\microsoft.testplatform.testhost\18.5.1\build\net8.0\x64\testhost.dll
+C:\Users\ramir\.nuget\packages\xunit.runner.visualstudio\3.1.5\build\net8.0\xunit.abstractions.dll
+C:\Users\ramir\.nuget\packages\xunit.runner.visualstudio\3.1.5\build\net8.0\xunit.runner.visualstudio.testadapter.dll
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\API.IntegrationTests\TestResults\325bf985-5f8a-4ed2-90f1-8c42e9c6ae67\coverage.cobertura.xml
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\API.IntegrationTests\TestResults\c353ad16-b55e-4ba1-bcd8-6c08a7919f6a\coverage.cobertura.xml
