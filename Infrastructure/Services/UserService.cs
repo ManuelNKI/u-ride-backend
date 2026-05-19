@@ -21,39 +21,67 @@ public class UserService : IUserService
     /// </summary>
     public async Task<UserProfileDto> SyncUserAsync(SyncUserDto dto)
     {
-        // Asegurar que displayName nunca sea null o vacío para la BD, y truncar a 200 chars
         var displayName = string.IsNullOrWhiteSpace(dto.DisplayName) ? null : dto.DisplayName.Trim();
         if (displayName is not null && displayName.Length > 200)
             displayName = displayName[..200];
 
+        // 1. Intentar buscar por FirebaseUid primero
         var user = await _uow.Users.GetByUidAsync(dto.FirebaseUid);
 
         if (user is null)
         {
-            user = new User
+            // 2. SOLUCIÓN AL DUPLICADO: Si no se halla por UID, buscar por Email antes de insertar
+            // Nota: Asegúrate de tener un método para buscar por email en tu repositorio, o haz la consulta pertinente.
+            user = await _uow.Users.GetByEmailAsync(dto.Email);
+
+            if (user is null)
             {
-                FirebaseUid = dto.FirebaseUid,
-                Email = dto.Email,
-                EmailVerified = dto.EmailVerified,
-                DisplayName = displayName ?? dto.Email, // fallback al email si no hay nombre
-                Career = dto.Career,
-                Zone = dto.Zone,
-                Phone = dto.Phone,
-                PhotoUrl = dto.PhotoUrl
-            };
-            await _uow.Users.AddAsync(user);
+                // CASO A: El usuario es genuinamente nuevo (No existe el UID ni el Email) -> INSERT
+                user = new User
+                {
+                    FirebaseUid = dto.FirebaseUid,
+                    Email = dto.Email,
+                    EmailVerified = dto.EmailVerified,
+                    DisplayName = displayName ?? dto.Email,
+                    Career = string.IsNullOrWhiteSpace(dto.Career) ? "Por definir" : dto.Career.Trim(),
+                    Zone = string.IsNullOrWhiteSpace(dto.Zone) ? "Por definir" : dto.Zone.Trim(),
+                    Phone = string.IsNullOrWhiteSpace(dto.Phone) ? "" : dto.Phone.Trim(),
+                    PhotoUrl = dto.PhotoUrl
+                };
+                await _uow.Users.AddAsync(user);
+            }
+            else
+            {
+                // CASO B: El correo ya existía pero con otro UID (vínculo roto Firebase-SQL) -> UPDATE DE SEGURIDAD
+                // Vinculamos el nuevo UID de Firebase al registro que ya teníamos en SQL Server
+                user.FirebaseUid = dto.FirebaseUid;
+                user.EmailVerified = dto.EmailVerified;
+
+                if (displayName is not null)
+                    user.DisplayName = displayName;
+
+                user.Career = dto.Career ?? user.Career;
+                user.Zone = dto.Zone ?? user.Zone;
+                user.Phone = dto.Phone ?? user.Phone;
+                user.PhotoUrl = dto.PhotoUrl ?? user.PhotoUrl;
+
+                _uow.Users.Update(user);
+            }
         }
         else
         {
+            // CASO C: El usuario existe con su UID correcto -> UPDATE clásico
             user.Email = dto.Email;
             user.EmailVerified = dto.EmailVerified;
-            // Solo actualizar DisplayName si el nuevo valor no está vacío
+
             if (displayName is not null)
                 user.DisplayName = displayName;
+
             user.Career = dto.Career ?? user.Career;
             user.Zone = dto.Zone ?? user.Zone;
             user.Phone = dto.Phone ?? user.Phone;
             user.PhotoUrl = dto.PhotoUrl ?? user.PhotoUrl;
+
             _uow.Users.Update(user);
         }
 

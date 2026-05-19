@@ -17,6 +17,13 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetByUidAsync(string firebaseUid)
         => await _context.Users.FindAsync(firebaseUid);
 
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        // Usamos el EF Context que ya tiene inyectado tu repositorio interno
+        return await _context.Users
+            .FirstOrDefaultAsync(u => u.Email.ToLower() == email.ToLower().Trim());
+    }
+
     public async Task<List<User>> GetAllAsync(int page, int pageSize)
         => await _context.Users
             .OrderBy(u => u.DisplayName)
