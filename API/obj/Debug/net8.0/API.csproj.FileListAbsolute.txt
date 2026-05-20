@@ -924,3 +924,5 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Softw
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\API\obj\Debug\net8.0\ref\API.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\API\bin\Debug\net8.0\appsettings.json
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\bin\Debug\net8.0\CloudinaryDotNet.dll
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\bin\Debug\net8.0\Newtonsoft.Json.dll
