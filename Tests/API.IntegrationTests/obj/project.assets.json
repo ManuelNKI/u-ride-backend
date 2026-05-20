@@ -242,6 +242,22 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/8.0.11": {
         "type": "package",
         "dependencies": {
@@ -2461,6 +2477,20 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.8.0.11.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/8.0.0": {
+      "sha512": "/pT9FOO0BxGSRscK/ekEb6TdiP3+nnyhPLElE1yuVG/QaZLaBAuM3RoywBHdIxWoFALaOS7ktXlKzuMX3khJ4A==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/8.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/net8.0/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.8.0.0.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/8.0.11": {
@@ -5316,6 +5346,7 @@
     "net8.0": [
       "API >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Testing >= 8.0.0",
+      "Microsoft.EntityFrameworkCore.InMemory >= 8.0.0",
       "Microsoft.NET.Test.Sdk >= 18.5.1",
       "coverlet.collector >= 6.0.2",
       "xunit >= 2.9.2",
@@ -5323,23 +5354,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ramir\\.nuget\\packages\\": {},
+    "C:\\Users\\braya\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\API.IntegrationTests.csproj",
+      "projectUniqueName": "C:\\GestionPruebas\\Proyecto\\u-ride-backend\\Tests\\API.IntegrationTests\\API.IntegrationTests.csproj",
       "projectName": "API.IntegrationTests",
-      "projectPath": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\API.IntegrationTests.csproj",
-      "packagesPath": "C:\\Users\\ramir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\obj\\",
+      "projectPath": "C:\\GestionPruebas\\Proyecto\\u-ride-backend\\Tests\\API.IntegrationTests\\API.IntegrationTests.csproj",
+      "packagesPath": "C:\\Users\\braya\\.nuget\\packages\\",
+      "outputPath": "C:\\GestionPruebas\\Proyecto\\u-ride-backend\\Tests\\API.IntegrationTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ramir\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\braya\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -5348,15 +5379,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\API.csproj": {
-              "projectPath": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\API.csproj"
+            "C:\\GestionPruebas\\Proyecto\\u-ride-backend\\API\\API.csproj": {
+              "projectPath": "C:\\GestionPruebas\\Proyecto\\u-ride-backend\\API\\API.csproj"
             }
           }
         }
@@ -5371,13 +5401,17 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "10.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Testing": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.EntityFrameworkCore.InMemory": {
             "target": "Package",
             "version": "[8.0.0, )"
           },
@@ -5416,7 +5450,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.313/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
