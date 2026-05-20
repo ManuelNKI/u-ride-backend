@@ -44,6 +44,8 @@ public static class DependencyInjection
         services.AddScoped<IReviewService, ReviewService>();
         services.AddScoped<IReportService, ReportService>();
         services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IVehicleService, VehicleService>();
+        services.AddScoped<ICloudinaryService, CloudinaryService>();
 
         return services;
     }

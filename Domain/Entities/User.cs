@@ -41,4 +41,5 @@ public class User : AuditableEntity
     public ICollection<Report> ReportsFiled { get; set; } = new List<Report>();
     public ICollection<Report> ReportsReceived { get; set; } = new List<Report>();
     public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+    public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
 }
