@@ -9,10 +9,12 @@ namespace Infrastructure.Services;
 public class UserService : IUserService
 {
     private readonly IUnitOfWork _uow;
+    private readonly ICloudinaryService _cloudinary;
 
-    public UserService(IUnitOfWork uow)
+    public UserService(IUnitOfWork uow, ICloudinaryService cloudinary)
     {
         _uow = uow;
+        _cloudinary = cloudinary;
     }
 
     /// <summary>
@@ -104,7 +106,20 @@ public class UserService : IUserService
         if (dto.Career is not null) user.Career = dto.Career;
         if (dto.Zone is not null) user.Zone = dto.Zone;
         if (dto.Phone is not null) user.Phone = dto.Phone;
-        if (dto.PhotoUrl is not null) user.PhotoUrl = dto.PhotoUrl;
+        
+        if (dto.PhotoUrl is not null)
+        {
+            if (!string.IsNullOrWhiteSpace(user.PhotoUrl) && user.PhotoUrl != dto.PhotoUrl && user.PhotoUrl.Contains("cloudinary.com"))
+            {
+                var publicId = ExtractPublicIdFromUrl(user.PhotoUrl);
+                if (!string.IsNullOrWhiteSpace(publicId))
+                {
+                    await _cloudinary.DeleteImageAsync(publicId);
+                }
+            }
+            user.PhotoUrl = dto.PhotoUrl;
+        }
+        
         _uow.Users.Update(user);
 
         await _uow.SaveChangesAsync();
@@ -187,4 +202,45 @@ public class UserService : IUserService
         CreatedAt = user.CreatedAt,
         UpdatedAt = user.UpdatedAt
     };
+
+    private static string? ExtractPublicIdFromUrl(string url)
+    {
+        try
+        {
+            var uri = new Uri(url);
+            var segments = uri.Segments;
+            
+            int uploadIndex = -1;
+            for (int i = 0; i < segments.Length; i++)
+            {
+                if (segments[i].TrimEnd('/') == "upload")
+                {
+                    uploadIndex = i;
+                    break;
+                }
+            }
+
+            if (uploadIndex != -1 && uploadIndex < segments.Length - 1)
+            {
+                var pathSegments = segments.Skip(uploadIndex + 1).Select(s => s.TrimEnd('/'));
+                var path = string.Join("/", pathSegments);
+                
+                var parts = path.Split('/');
+                if (parts.Length > 1 && parts[0].StartsWith("v") && parts[0].Length > 1 && char.IsDigit(parts[0][1]))
+                {
+                    path = string.Join("/", parts.Skip(1));
+                }
+
+                var lastDot = path.LastIndexOf('.');
+                if (lastDot > 0)
+                {
+                    path = path.Substring(0, lastDot);
+                }
+                
+                return Uri.UnescapeDataString(path);
+            }
+        }
+        catch { }
+        return null;
+    }
 }
