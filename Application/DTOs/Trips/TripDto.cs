@@ -24,6 +24,7 @@ public class TripDto
     public string? Notes { get; set; }
     public string Status { get; set; } = null!;
     public List<string> ConfirmedPassengerUids { get; set; } = new();
+    public List<string> RuleTexts { get; set; } = new();
     public VehicleInfoDto Vehicle { get; set; } = null!;
     public TripRulesDto Rules { get; set; } = null!;
     public DateTime CreatedAt { get; set; }

@@ -19,5 +19,6 @@ public class UpdateTripDto
     public decimal? Price { get; set; }
     public string? Notes { get; set; }
     public VehicleInfoDto? Vehicle { get; set; }
+    public List<string>? RuleTexts { get; set; }
     public TripRulesDto? Rules { get; set; }
 }

@@ -38,6 +38,8 @@ public class Trip : AuditableEntity
     // ──── Pasajeros confirmados (almacenado como JSON en SQL Server) ────
     public List<string> ConfirmedPassengerUids { get; set; } = new();
 
+    public List<string> RuleTexts { get; set; } = new();
+
     // ──── Owned Types ────
     public VehicleInfo Vehicle { get; set; } = null!;
     public TripRules Rules { get; set; } = null!;
