@@ -15,14 +15,16 @@ namespace Application.Tests.Services
     {
         private readonly Mock<IUnitOfWork> _uowMock;
         private readonly Mock<IUserRepository> _userRepoMock;
+        private readonly Mock<ICloudinaryService> _cloudinaryMock;
         private readonly UserService _userService;
 
         public UserServiceTests()
         {
             _uowMock = new Mock<IUnitOfWork>();
             _userRepoMock = new Mock<IUserRepository>();
+            _cloudinaryMock = new Mock<ICloudinaryService>();
             _uowMock.Setup(u => u.Users).Returns(_userRepoMock.Object);
-            _userService = new UserService(_uowMock.Object);
+            _userService = new UserService(_uowMock.Object, _cloudinaryMock.Object);
         }
 
         [Fact]

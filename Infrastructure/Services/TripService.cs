@@ -5,15 +5,30 @@ using Application.Services;
 using Domain.Entities;
 using Domain.Enums;
 
+using System.Collections.Concurrent;
+
 namespace Infrastructure.Services;
 
 public class TripService : ITripService
 {
     private readonly IUnitOfWork _uow;
+    private static readonly ConcurrentDictionary<Guid, DriverLocationDto> _liveLocations = new();
 
     public TripService(IUnitOfWork uow)
     {
         _uow = uow;
+    }
+
+    public void SetDriverLiveLocation(Guid tripId, DriverLocationDto location)
+    {
+        location.UpdatedAt = DateTime.UtcNow;
+        _liveLocations[tripId] = location;
+    }
+
+    public DriverLocationDto? GetDriverLiveLocation(Guid tripId)
+    {
+        _liveLocations.TryGetValue(tripId, out var loc);
+        return loc;
     }
 
     public async Task<TripDto> CreateTripAsync(string driverUid, string driverName, CreateTripDto dto)
@@ -37,6 +52,7 @@ public class TripService : ITripService
             Price = dto.Price,
             Notes = dto.Notes,
             Status = TripStatus.Open,
+            RuleTexts = dto.RuleTexts ?? new List<string>(),
             Vehicle = new VehicleInfo
             {
                 Plate = dto.Vehicle.Plate,
@@ -145,6 +161,7 @@ public class TripService : ITripService
         if (dto.SeatsAvailable.HasValue) trip.SeatsAvailable = dto.SeatsAvailable.Value;
         if (dto.Price.HasValue) trip.Price = dto.Price.Value;
         if (dto.Notes is not null) trip.Notes = dto.Notes;
+        if (dto.RuleTexts is not null) trip.RuleTexts = dto.RuleTexts;
 
         if (dto.Vehicle is not null)
         {
@@ -276,6 +293,7 @@ public class TripService : ITripService
         Notes = trip.Notes,
         Status = trip.Status.ToString().ToLowerInvariant(),
         ConfirmedPassengerUids = trip.ConfirmedPassengerUids,
+        RuleTexts = trip.RuleTexts,
         Vehicle = new VehicleInfoDto
         {
             Plate = trip.Vehicle.Plate,

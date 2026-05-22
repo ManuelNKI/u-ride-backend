@@ -87,7 +87,31 @@ public class UserService : IUserService
             _uow.Users.Update(user);
         }
 
-        await _uow.SaveChangesAsync();
+        try
+        {
+            await _uow.SaveChangesAsync();
+        }
+        catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
+        {
+            if (ex.InnerException?.Message.Contains("Violation of PRIMARY KEY constraint") == true)
+            {
+                // Un request concurrente ya insertó a este usuario.
+                // Como es una sincronización, devolvemos el DTO simulando éxito.
+                return new UserProfileDto 
+                {
+                    FirebaseUid = dto.FirebaseUid,
+                    Email = dto.Email,
+                    EmailVerified = dto.EmailVerified,
+                    DisplayName = displayName ?? dto.Email,
+                    Career = dto.Career ?? "Por definir",
+                    Zone = dto.Zone ?? "Por definir",
+                    Phone = dto.Phone ?? "",
+                    PhotoUrl = dto.PhotoUrl
+                };
+            }
+            throw;
+        }
+
         return MapToDto(user);
     }
 

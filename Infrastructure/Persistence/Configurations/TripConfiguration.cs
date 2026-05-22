@@ -29,10 +29,14 @@ public class TripConfiguration : IEntityTypeConfiguration<Trip>
             .HasConversion<string>()
             .HasMaxLength(20);
 
-        // ──── ConfirmedPassengerUids — EF Core 8 JSON primitive collection ────
+        // ──── ConfirmedPassengerUids y RuleTexts — EF Core 8 JSON primitive collection ────
         builder.PrimitiveCollection(t => t.ConfirmedPassengerUids)
             .ElementType()
             .HasMaxLength(128);
+
+        builder.PrimitiveCollection(t => t.RuleTexts)
+            .ElementType()
+            .HasMaxLength(250);
 
         // ──── Owned Type: VehicleInfo ────
         builder.OwnsOne(t => t.Vehicle, v =>
