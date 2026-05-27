@@ -33,6 +33,19 @@ public class TripService : ITripService
 
     public async Task<TripDto> CreateTripAsync(string driverUid, string driverName, CreateTripDto dto)
     {
+        var driver = await _uow.Users.GetByUidAsync(driverUid) 
+            ?? throw new InvalidOperationException("Driver not found.");
+
+        if (driver.SuspendedUntil.HasValue && driver.SuspendedUntil.Value > DateTime.UtcNow)
+        {
+            throw new InvalidOperationException($"Tu cuenta está suspendida hasta {driver.SuspendedUntil.Value:dd/MM/yyyy HH:mm} UTC y no puedes publicar viajes.");
+        }
+
+        if (driver.Disabled)
+        {
+            throw new InvalidOperationException("Tu cuenta está desactivada y no puedes publicar viajes.");
+        }
+
         var trip = new Trip
         {
             Id = Guid.NewGuid(),
@@ -71,13 +84,9 @@ public class TripService : ITripService
         await _uow.Trips.AddAsync(trip);
 
         // Incrementar conteo de viajes del conductor
-        var driver = await _uow.Users.GetByUidAsync(driverUid);
-        if (driver is not null)
-        {
-            driver.DriverTripsCount++;
-            driver.TripsCount++;
-            _uow.Users.Update(driver);
-        }
+        driver.DriverTripsCount++;
+        driver.TripsCount++;
+        _uow.Users.Update(driver);
 
         await _uow.SaveChangesAsync();
         return MapToDto(trip);

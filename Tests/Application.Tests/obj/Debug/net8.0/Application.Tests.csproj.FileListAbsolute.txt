@@ -475,3 +475,4 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Softw
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Tests\Application.Tests\obj\Debug\net8.0\Applicat.7AAE1402.Up2Date
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Tests\Application.Tests\obj\Debug\net8.0\Application.Tests.genruntimeconfig.cache
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Tests\Application.Tests\obj\Debug\net8.0\ref\Application.Tests.dll
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\Application.Tests\bin\Debug\net8.0\CloudinaryDotNet.dll

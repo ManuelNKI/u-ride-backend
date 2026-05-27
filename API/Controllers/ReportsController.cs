@@ -52,6 +52,35 @@ public class ReportsController : ControllerBase
         return Ok(report);
     }
 
+    /// <summary>
+    /// Sube una imagen de evidencia a Coolify (localmente en wwwroot/uploads).
+    /// </summary>
+    [HttpPost("upload-evidence")]
+    public async Task<IActionResult> UploadEvidence(IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest("No file uploaded.");
+
+        if (!file.ContentType.StartsWith("image/"))
+            return BadRequest("File is not an image.");
+
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "reports");
+        if (!Directory.Exists(uploadsFolder))
+            Directory.CreateDirectory(uploadsFolder);
+
+        var uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
+        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        // Devolvemos la ruta relativa para accederla públicamente
+        var relativeUrl = $"/uploads/reports/{uniqueFileName}";
+        return Ok(new { evidenceUrl = relativeUrl });
+    }
+
     private string GetFirebaseUid()
         => User.FindFirstValue(ClaimTypes.NameIdentifier)
            ?? User.FindFirstValue("user_id")

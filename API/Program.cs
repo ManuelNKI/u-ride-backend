@@ -123,6 +123,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(); // Habilitar wwwroot para imágenes/evidencias
 app.UseCors("AllowAll");
 
 app.UseAuthentication();

@@ -10,10 +10,12 @@ namespace Infrastructure.Services;
 public class ReportService : IReportService
 {
     private readonly IUnitOfWork _uow;
+    private readonly INotificationService _notificationService;
 
-    public ReportService(IUnitOfWork uow)
+    public ReportService(IUnitOfWork uow, INotificationService notificationService)
     {
         _uow = uow;
+        _notificationService = notificationService;
     }
 
     public async Task<ReportDto> CreateReportAsync(string reporterUid, CreateReportDto dto)
@@ -75,6 +77,22 @@ public class ReportService : IReportService
                 user.SuspendedUntil = DateTime.UtcNow.AddDays(7); // Suspensión de 7 días por defecto
                 _uow.Users.Update(user);
             }
+            
+            await _notificationService.SendNotificationAsync(
+                userUid: report.ReportedUid,
+                title: "Cuenta Suspendida",
+                message: "Tu cuenta ha sido suspendida por 7 días debido a un reporte en tu contra.",
+                type: NotificationType.System
+            );
+        }
+        else if (reportAction == ReportAction.Warned)
+        {
+            await _notificationService.SendNotificationAsync(
+                userUid: report.ReportedUid,
+                title: "Advertencia",
+                message: "Has recibido una advertencia debido a un reporte. Por favor, respeta las normas de la comunidad.",
+                type: NotificationType.System
+            );
         }
 
         await _uow.SaveChangesAsync();

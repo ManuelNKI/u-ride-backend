@@ -1410,3 +1410,6 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Softw
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Tests\API.IntegrationTests\obj\Debug\net8.0\API.IntegrationTests.pdb
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Tests\API.IntegrationTests\obj\Debug\net8.0\API.IntegrationTests.genruntimeconfig.cache
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Tests\API.IntegrationTests\obj\Debug\net8.0\ref\API.IntegrationTests.dll
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\API.IntegrationTests\bin\Debug\net8.0\CloudinaryDotNet.dll
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\API.IntegrationTests\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Tests\API.IntegrationTests\bin\Debug\net8.0\API.staticwebassets.runtime.json

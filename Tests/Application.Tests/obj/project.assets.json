@@ -6582,23 +6582,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Cristian Jurado\\.nuget\\packages\\": {},
+    "C:\\Users\\ramir\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Tests\\Application.Tests\\Application.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\Application.Tests.csproj",
       "projectName": "Application.Tests",
-      "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Tests\\Application.Tests\\Application.Tests.csproj",
-      "packagesPath": "C:\\Users\\Cristian Jurado\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Tests\\Application.Tests\\obj\\",
+      "projectPath": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\Application.Tests.csproj",
+      "packagesPath": "C:\\Users\\ramir\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Cristian Jurado\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ramir\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6607,20 +6607,21 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Application\\Application.csproj": {
-              "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Application\\Application.csproj"
+            "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Application.csproj": {
+              "projectPath": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Application.csproj"
             },
-            "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Domain\\Domain.csproj"
+            "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Domain.csproj"
             },
-            "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Cristian Jurado\\Documents\\UTA\\6TO SOFTWARE\\Gestion e Implantacion Software\\proyecto final\\u-ride-backend\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -6635,7 +6636,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -6680,7 +6681,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
