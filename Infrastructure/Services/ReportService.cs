@@ -35,6 +35,23 @@ public class ReportService : IReportService
         await _uow.Reports.AddAsync(report);
         await _uow.SaveChangesAsync();
 
+        // Notificar a todos los administradores del sistema
+        try
+        {
+            var allUsers = await _uow.Users.GetAllAsync(1, 500);
+            var admins = allUsers.Where(u => u.IsAdmin).ToList();
+            foreach (var admin in admins)
+            {
+                await _notificationService.SendNotificationAsync(
+                    userUid: admin.FirebaseUid,
+                    title: "Nuevo Reporte",
+                    message: $"Se ha recibido un nuevo reporte. Motivo: {dto.Reason}",
+                    type: NotificationType.System
+                );
+            }
+        }
+        catch { /* best-effort */ }
+
         return MapToDto(report);
     }
 
@@ -76,6 +93,15 @@ public class ReportService : IReportService
             {
                 user.SuspendedUntil = DateTime.UtcNow.AddDays(7); // Suspensión de 7 días por defecto
                 _uow.Users.Update(user);
+
+                var openReports = await _uow.Reports.GetByReportedUidAsync(report.ReportedUid);
+                foreach (var r in openReports.Where(x => x.Id != report.Id && x.Status == ReportStatus.Open))
+                {
+                    r.Status = ReportStatus.Resolved;
+                    r.Action = ReportAction.Suspended;
+                    r.AdminNotes = "[Auto-resuelto porque la cuenta fue suspendida en otro reporte]";
+                    _uow.Reports.Update(r);
+                }
             }
             
             await _notificationService.SendNotificationAsync(
@@ -87,12 +113,50 @@ public class ReportService : IReportService
         }
         else if (reportAction == ReportAction.Warned)
         {
-            await _notificationService.SendNotificationAsync(
-                userUid: report.ReportedUid,
-                title: "Advertencia",
-                message: "Has recibido una advertencia debido a un reporte. Por favor, respeta las normas de la comunidad.",
-                type: NotificationType.System
-            );
+            var thirtyDaysAgo = DateTime.UtcNow.AddDays(-30);
+            var recentReports = await _uow.Reports.GetByReportedUidAsync(report.ReportedUid);
+            var recentWarnings = recentReports.Count(r => 
+                r.Action == ReportAction.Warned && 
+                r.UpdatedAt >= thirtyDaysAgo) + 1; // +1 to include this new warning
+
+            if (recentWarnings >= 3)
+            {
+                // Auto suspend instead
+                report.Action = ReportAction.Suspended;
+                report.AdminNotes = (adminNotes + " [Auto-suspendido por acumular 3 advertencias en 30 días]").Trim();
+                
+                var user = await _uow.Users.GetByUidAsync(report.ReportedUid);
+                if (user is not null)
+                {
+                    user.SuspendedUntil = DateTime.UtcNow.AddDays(7);
+                    _uow.Users.Update(user);
+
+                    foreach (var r in recentReports.Where(x => x.Id != report.Id && x.Status == ReportStatus.Open))
+                    {
+                        r.Status = ReportStatus.Resolved;
+                        r.Action = ReportAction.Suspended;
+                        r.AdminNotes = "[Auto-resuelto porque la cuenta fue suspendida automáticamente por límite de advertencias]";
+                        _uow.Reports.Update(r);
+                    }
+                }
+
+                await _notificationService.SendNotificationAsync(
+                    userUid: report.ReportedUid,
+                    title: "Cuenta Suspendida",
+                    message: $"Has acumulado {recentWarnings} advertencias en el último mes. Tu cuenta ha sido suspendida por 7 días automáticamente.",
+                    type: NotificationType.System
+                );
+            }
+            else
+            {
+                int warningsLeft = 3 - recentWarnings;
+                await _notificationService.SendNotificationAsync(
+                    userUid: report.ReportedUid,
+                    title: "Advertencia",
+                    message: $"Has recibido una advertencia debido a un reporte. Acumulas {recentWarnings} advertencia(s) en el último mes. A las 3 advertencias tu cuenta será suspendida (te faltan {warningsLeft}).",
+                    type: NotificationType.System
+                );
+            }
         }
 
         await _uow.SaveChangesAsync();

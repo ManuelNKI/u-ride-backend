@@ -125,6 +125,17 @@ public class UsersController : ControllerBase
         return Ok(new { message = $"User {uid} suspended until {request.Until:u}" });
     }
 
+    /// <summary>
+    /// [Admin] Levanta la suspensión de un usuario.
+    /// </summary>
+    [HttpPost("{uid}/unsuspend")]
+    [Authorize]
+    public async Task<IActionResult> UnsuspendUser(string uid)
+    {
+        await _userService.UnsuspendUserAsync(uid);
+        return Ok(new { message = $"User {uid} suspension lifted." });
+    }
+
     // ──── Helper: Extraer FirebaseUid del token JWT ────
     private string GetFirebaseUid()
         => User.FindFirstValue(ClaimTypes.NameIdentifier)

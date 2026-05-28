@@ -157,6 +157,26 @@ public class UserService : IUserService
 
         user.SuspendedUntil = until;
         _uow.Users.Update(user);
+
+        var openReports = await _uow.Reports.GetByReportedUidAsync(firebaseUid);
+        foreach (var r in openReports.Where(x => x.Status == Domain.Enums.ReportStatus.Open))
+        {
+            r.Status = Domain.Enums.ReportStatus.Resolved;
+            r.Action = Domain.Enums.ReportAction.Suspended;
+            r.AdminNotes = "[Auto-resuelto por suspensión manual de cuenta por administrador]";
+            _uow.Reports.Update(r);
+        }
+
+        await _uow.SaveChangesAsync();
+    }
+
+    public async Task UnsuspendUserAsync(string firebaseUid)
+    {
+        var user = await _uow.Users.GetByUidAsync(firebaseUid)
+            ?? throw new KeyNotFoundException($"User {firebaseUid} not found.");
+
+        user.SuspendedUntil = null;
+        _uow.Users.Update(user);
         await _uow.SaveChangesAsync();
     }
 
