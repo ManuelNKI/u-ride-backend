@@ -7,6 +7,7 @@ public interface IUserRepository
     Task<User?> GetByUidAsync(string firebaseUid);
     Task<User?> GetByEmailAsync(string email);
     Task<List<User>> GetAllAsync(int page, int pageSize);
+    Task<List<User>> GetExpiredSuspensionsAsync();
     Task<int> CountAsync();
     Task AddAsync(User user);
     void Update(User user);

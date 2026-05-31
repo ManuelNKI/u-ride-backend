@@ -47,6 +47,9 @@ public static class DependencyInjection
         services.AddScoped<IVehicleService, VehicleService>();
         services.AddScoped<ICloudinaryService, CloudinaryService>();
 
+        // ──── Background Workers ────
+        services.AddHostedService<SuspensionExpirationWorker>();
+
         return services;
     }
 }

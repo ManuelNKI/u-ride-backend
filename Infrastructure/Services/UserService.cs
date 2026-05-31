@@ -10,11 +10,13 @@ public class UserService : IUserService
 {
     private readonly IUnitOfWork _uow;
     private readonly ICloudinaryService _cloudinary;
+    private readonly INotificationService _notificationService;
 
-    public UserService(IUnitOfWork uow, ICloudinaryService cloudinary)
+    public UserService(IUnitOfWork uow, ICloudinaryService cloudinary, INotificationService notificationService)
     {
         _uow = uow;
         _cloudinary = cloudinary;
+        _notificationService = notificationService;
     }
 
     /// <summary>
@@ -178,6 +180,13 @@ public class UserService : IUserService
         user.SuspendedUntil = null;
         _uow.Users.Update(user);
         await _uow.SaveChangesAsync();
+
+        await _notificationService.SendNotificationAsync(
+            userUid: firebaseUid,
+            title: "Suspensión Levantada",
+            message: "Tu tiempo de suspensión ha terminado. Ya puedes volver a usar tu cuenta normalmente.",
+            type: Domain.Enums.NotificationType.System
+        );
     }
 
     // ──── Admin ────

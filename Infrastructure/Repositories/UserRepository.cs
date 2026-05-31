@@ -32,6 +32,14 @@ public class UserRepository : IUserRepository
             .AsNoTracking()
             .ToListAsync();
 
+    public async Task<List<User>> GetExpiredSuspensionsAsync()
+    {
+        var now = DateTime.UtcNow;
+        return await _context.Users
+            .Where(u => u.SuspendedUntil != null && u.SuspendedUntil <= now)
+            .ToListAsync();
+    }
+
     public async Task<int> CountAsync()
         => await _context.Users.CountAsync();
 
