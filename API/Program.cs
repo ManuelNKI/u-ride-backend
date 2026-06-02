@@ -12,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Infrastructure (DbContext, Repositories, Services)
 builder.Services.AddInfrastructure(builder.Configuration);
 
+// Hosted Services
+builder.Services.AddHostedService<API.HostedServices.TripExpirationHostedService>();
+
 // Controllers + JSON camelCase + enum como string
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

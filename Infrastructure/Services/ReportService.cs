@@ -20,6 +20,14 @@ public class ReportService : IReportService
 
     public async Task<ReportDto> CreateReportAsync(string reporterUid, CreateReportDto dto)
     {
+        // Validar: un solo reporte por viaje por usuario
+        if (dto.TripId.HasValue)
+        {
+            var yaReporto = await _uow.Reports.HasReportedForTripAsync(reporterUid, dto.TripId.Value);
+            if (yaReporto)
+                throw new InvalidOperationException("Ya has enviado un reporte para este viaje.");
+        }
+
         var report = new Report
         {
             Id = Guid.NewGuid(),
@@ -54,6 +62,12 @@ public class ReportService : IReportService
 
         return MapToDto(report);
     }
+
+    public async Task<bool> HasReportedForTripAsync(string reporterUid, Guid tripId)
+        => await _uow.Reports.HasReportedForTripAsync(reporterUid, tripId);
+
+    public async Task<bool> HasReportedUserForTripAsync(string reporterUid, Guid tripId, string reportedUid)
+        => await _uow.Reports.HasReportedUserForTripAsync(reporterUid, tripId, reportedUid);
 
     public async Task<PagedResultDto<ReportDto>> GetAllAsync(int page, int pageSize)
     {

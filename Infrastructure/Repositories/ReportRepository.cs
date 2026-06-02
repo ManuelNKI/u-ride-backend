@@ -35,6 +35,14 @@ public class ReportRepository : IReportRepository
             .AsNoTracking()
             .ToListAsync();
 
+    public async Task<bool> HasReportedForTripAsync(string reporterUid, Guid tripId)
+        => await _context.Reports
+            .AnyAsync(r => r.ReporterUid == reporterUid && r.TripId == tripId);
+
+    public async Task<bool> HasReportedUserForTripAsync(string reporterUid, Guid tripId, string reportedUid)
+        => await _context.Reports
+            .AnyAsync(r => r.ReporterUid == reporterUid && r.TripId == tripId && r.ReportedUid == reportedUid);
+
     public async Task<int> CountAsync()
         => await _context.Reports.CountAsync();
 
