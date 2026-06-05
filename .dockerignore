@@ -1,0 +1,22 @@
+# Ignorar carpetas de compilación local
+**/bin/
+**/obj/
+
+# Ignorar carpetas de control de versiones y configuración de IDEs
+.git/
+.gitignore
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignorar reportes de cobertura y pruebas
+TestResults/
+coveragereport/
+
+# Archivos Docker e instrucciones
+Dockerfile
+.dockerignore
