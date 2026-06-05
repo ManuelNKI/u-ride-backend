@@ -23,7 +23,9 @@ RUN dotnet restore "Tests/Application.Tests/Application.Tests.csproj"
 
 COPY . .
 
-RUN dotnet test --configuration $BUILD_CONFIGURATION --collect:"XPlat Code Coverage" --results-directory /app/testresults
+RUN dotnet test "Tests/API.IntegrationTests/API.IntegrationTests.csproj" --configuration $BUILD_CONFIGURATION --collect:"XPlat Code Coverage" --results-directory /app/testresults
+RUN dotnet test "Tests/Application.Tests/Application.Tests.csproj" --configuration $BUILD_CONFIGURATION --collect:"XPlat Code Coverage" --results-directory /app/testresults
+
 
 RUN /root/.dotnet/tools/reportgenerator \
     -reports:"/app/testresults/**/*.xml" \
