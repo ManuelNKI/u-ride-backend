@@ -1,0 +1,300 @@
+{
+  "scannerProperties": [
+    {
+      "key": "sonar.scanner.app",
+      "value": "ScannerMSBuild"
+    },
+    {
+      "key": "sonar.scanner.appVersion",
+      "value": "11.2.1"
+    },
+    {
+      "key": "sonar.scanner.bootstrapStartTime",
+      "value": "1778098694000"
+    },
+    {
+      "key": "sonar.projectKey",
+      "value": "u-ride-frontend"
+    },
+    {
+      "key": "sonar.projectName",
+      "value": "u-ride-backend"
+    },
+    {
+      "key": "sonar.working.directory",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\.sonar"
+    },
+    {
+      "key": "sonar.projectBaseDir",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend"
+    },
+    {
+      "key": "sonar.pullrequest.cache.basepath",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend"
+    },
+    {
+      "key": "sonar.sources",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.vs\\VSWorkspaceState.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.vscode\\settings.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_GlobalExceptionMiddleware.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_NameRequest.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_NotificationsController.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_Program.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_ReportsController.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_ResolveReportRequest.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_ReviewsController.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_SuspendRequest.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_TextRequest.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_TripRequestsController.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_TripsController.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_UpdateTripStatusRequest.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\API_UsersController.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_AppRolesDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_CreateReportDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_CreateReviewDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_CreateTripDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_CreateTripRequestDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_NotificationDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_PagedResultDto_1.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_ReportDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_ReviewDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_SyncUserDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_TripDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_TripRequestDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_TripRouteDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_TripRuleDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_TripRulesDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_TripSearchDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_UpdateProfileDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_UpdateTripDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_UserProfileDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Application_VehicleInfoDto.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\class.js,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_AuditableEntity.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_Notification.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_Report.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_Review.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_Trip.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_TripRequest.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_TripRoute.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_TripRule.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_TripRules.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_User.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Domain_VehicleInfo.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\index.htm,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\index.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_AddTripRoutesAndRules.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_ApplicationDbContext.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_ApplicationDbContextModelSnapshot.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_DbSeeder.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_DependencyInjection.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_InitialCreate.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_MakeDisplayNameOptional.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_NotificationConfiguration.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_NotificationRepository.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_NotificationService.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_ReportConfiguration.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_ReportRepository.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_ReportService.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_ReviewConfiguration.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_ReviewRepository.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_ReviewService.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_TripConfiguration.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_TripRepository.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_TripRequestConfiguration.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_TripRequestRepository.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_TripRequestService.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_TripRouteRepository.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_TripRuleRepository.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_TripService.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_UnitOfWork.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_UserConfiguration.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_UserRepository.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\Infrastructure_UserService.html,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\main.js,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\coveragereport\\report.css,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.vs\\u-ride-backend.slnx\\config\\applicationhost.config,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.vs\\u-ride-backend.slnx\\v18\\DocumentLayout.backup.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.vs\\u-ride-backend.slnx\\v18\\DocumentLayout.json"
+    },
+    {
+      "key": "sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "sonar.modules",
+      "value": "14AF1F64-8062-414D-AE18-A25457A17951,A792EA1D-30FA-423C-B864-D31133C7CAC3,A5098EE2-A048-4342-BDE6-E908ABFAF474,D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3,CBFA08EA-AECE-205F-7B85-326FD0B81BAD,303B9CD7-CB5B-AB4A-80DC-12CB9FB10582"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.projectKey",
+      "value": "u-ride-frontend:14AF1F64-8062-414D-AE18-A25457A17951"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.projectName",
+      "value": "Domain"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.projectBaseDir",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.working.directory",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\.sonar\\mod0"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.sources",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\AuditableEntity.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\Notification.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\Report.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\Review.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\Trip.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\TripRequest.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\TripRoute.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\TripRule.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\TripRules.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\User.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Entities\\VehicleInfo.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Enums\\NotificationType.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Enums\\PaymentStatus.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Enums\\ReportAction.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Enums\\ReportStatus.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Enums\\RequestStatus.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\Enums\\TripStatus.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\obj\\Domain.csproj.nuget.dgspec.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\obj\\project.assets.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\bin\\Debug\\net8.0\\Domain.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Domain\\obj\\Debug\\net8.0\\Domain.sourcelink.json"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\0"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\0\\Issues.json"
+    },
+    {
+      "key": "14AF1F64-8062-414D-AE18-A25457A17951.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\0\\Telemetry.json"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.projectKey",
+      "value": "u-ride-frontend:A792EA1D-30FA-423C-B864-D31133C7CAC3"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.projectName",
+      "value": "Application"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.projectBaseDir",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.working.directory",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\.sonar\\mod1"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.sources",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\obj\\Application.csproj.nuget.dgspec.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\obj\\project.assets.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\bin\\Debug\\net8.0\\Application.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\obj\\Debug\\net8.0\\Application.sourcelink.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Common\\PagedResultDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Notifications\\NotificationDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Reports\\CreateReportDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Reports\\ReportDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Reviews\\CreateReviewDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Reviews\\ReviewDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\TripRequests\\CreateTripRequestDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\TripRequests\\TripRequestDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Trips\\CreateTripDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Trips\\TripDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Trips\\TripSearchDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Trips\\UpdateTripDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Users\\AppRolesDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Users\\SyncUserDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Users\\UpdateProfileDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\DTOs\\Users\\UserProfileDto.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\INotificationRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\IReportRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\IReviewRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\ITripRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\ITripRequestRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\ITripRouteRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\ITripRuleRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\IUnitOfWork.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Interfaces\\IUserRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Services\\INotificationService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Services\\IReportService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Services\\IReviewService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Services\\ITripRequestService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Services\\ITripService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Application\\Services\\IUserService.cs"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\1"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\1\\Issues.json"
+    },
+    {
+      "key": "A792EA1D-30FA-423C-B864-D31133C7CAC3.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\1\\Telemetry.json"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.projectKey",
+      "value": "u-ride-frontend:A5098EE2-A048-4342-BDE6-E908ABFAF474"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.projectName",
+      "value": "Infrastructure"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.projectBaseDir",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.working.directory",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\.sonar\\mod2"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.sources",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\obj\\Infrastructure.csproj.nuget.dgspec.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\obj\\project.assets.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\bin\\Debug\\net8.0\\Infrastructure.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\bin\\Debug\\net8.0\\Infrastructure.runtimeconfig.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\obj\\Debug\\net8.0\\Infrastructure.sourcelink.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\DependencyInjection.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Migrations\\20260502191309_InitialCreate.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Migrations\\20260502191309_InitialCreate.Designer.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Migrations\\20260503024203_AddTripRoutesAndRules.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Migrations\\20260503024203_AddTripRoutesAndRules.Designer.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Migrations\\20260503033842_MakeDisplayNameOptional.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Migrations\\20260503033842_MakeDisplayNameOptional.Designer.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Migrations\\ApplicationDbContextModelSnapshot.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\ApplicationDbContext.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\Configurations\\NotificationConfiguration.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\Configurations\\ReportConfiguration.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\Configurations\\ReviewConfiguration.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\Configurations\\TripConfiguration.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\Configurations\\TripRequestConfiguration.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\Configurations\\UserConfiguration.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\DbSeeder.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Persistence\\UnitOfWork.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Repositories\\NotificationRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Repositories\\ReportRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Repositories\\ReviewRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Repositories\\TripRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Repositories\\TripRequestRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Repositories\\TripRouteRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Repositories\\TripRuleRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Repositories\\UserRepository.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Services\\NotificationService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Services\\ReportService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Services\\ReviewService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Services\\TripRequestService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Services\\TripService.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Infrastructure\\Services\\UserService.cs"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\2"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\2\\Issues.json"
+    },
+    {
+      "key": "A5098EE2-A048-4342-BDE6-E908ABFAF474.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\2\\Telemetry.json"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.projectKey",
+      "value": "u-ride-frontend:D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.projectName",
+      "value": "Application.Tests"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.projectBaseDir",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.working.directory",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\.sonar\\mod3"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.sources",
+      "value": ""
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.tests",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\obj\\Application.Tests.csproj.nuget.dgspec.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\obj\\project.assets.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\bin\\Debug\\net8.0\\Application.Tests.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\bin\\Debug\\net8.0\\Application.Tests.runtimeconfig.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\obj\\Debug\\net8.0\\Application.Tests.sourcelink.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\UserServiceTests.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\TestResults\\9a173168-e1c1-43fa-8ef8-a4b587febf6b\\coverage.cobertura.xml,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\Application.Tests\\TestResults\\f172dc91-32e1-4cd9-a1e3-d5827c128ffa\\coverage.cobertura.xml"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\3"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\3\\Issues.json"
+    },
+    {
+      "key": "D36F9506-00AD-3D0B-2CDA-FF6675FE1CF3.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\3\\Telemetry.json"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.projectKey",
+      "value": "u-ride-frontend:CBFA08EA-AECE-205F-7B85-326FD0B81BAD"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.projectName",
+      "value": "API"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.projectBaseDir",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.working.directory",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\.sonar\\mod4"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.tests",
+      "value": ""
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.sources",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\appsettings.Development.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\appsettings.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\package-lock.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\API.csproj.nuget.dgspec.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\project.assets.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Properties\\launchSettings.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\bin\\Debug\\net8.0\\API.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\bin\\Debug\\net8.0\\API.runtimeconfig.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\bin\\Debug\\net8.0\\API.staticwebassets.endpoints.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\bin\\Debug\\net8.0\\appsettings.Development.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\bin\\Debug\\net8.0\\appsettings.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\bin\\Debug\\net8.0\\package-lock.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\API.sourcelink.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\ApiEndpoints.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\rjsmcshtml.dswa.cache.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\rjsmrazor.dswa.cache.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\rpswa.dswa.cache.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\staticwebassets.build.endpoints.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\staticwebassets.build.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\EndpointInfo\\API.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Controllers\\NotificationsController.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Controllers\\ReportsController.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Controllers\\ReviewsController.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Controllers\\TripRequestsController.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Controllers\\TripsController.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Controllers\\UsersController.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Middlewares\\GlobalExceptionMiddleware.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\Program.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\API.GlobalUsings.g.cs,\"C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs\",C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\API.AssemblyInfo.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\obj\\Debug\\net8.0\\API.MvcApplicationPartsAssemblyInfo.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\API.csproj.Backup.tmp,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\API\\API.http"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\4"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\4\\Issues.json"
+    },
+    {
+      "key": "CBFA08EA-AECE-205F-7B85-326FD0B81BAD.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\4\\Telemetry.json"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.projectKey",
+      "value": "u-ride-frontend:303B9CD7-CB5B-AB4A-80DC-12CB9FB10582"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.projectName",
+      "value": "API.IntegrationTests"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.projectBaseDir",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.working.directory",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\.sonar\\mod5"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.sourceEncoding",
+      "value": "utf-8"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.sources",
+      "value": ""
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.tests",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\obj\\API.IntegrationTests.csproj.nuget.dgspec.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\obj\\project.assets.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\API.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\API.IntegrationTests.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\API.IntegrationTests.runtimeconfig.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\API.runtimeconfig.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\API.staticwebassets.endpoints.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\Application.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\appsettings.Development.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\appsettings.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\Domain.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\Infrastructure.deps.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\MvcTestingAppManifest.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\bin\\Debug\\net8.0\\package-lock.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\obj\\Debug\\net8.0\\API.IntegrationTests.sourcelink.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\obj\\Debug\\net8.0\\MvcTestingAppManifest.json,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\UserControllerIntegrationTests.cs,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\TestResults\\325bf985-5f8a-4ed2-90f1-8c42e9c6ae67\\coverage.cobertura.xml,C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\Tests\\API.IntegrationTests\\TestResults\\c353ad16-b55e-4ba1-bcd8-6c08a7919f6a\\coverage.cobertura.xml"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.cs.analyzer.projectOutPaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\5"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.cs.roslyn.reportFilePaths",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\5\\Issues.json"
+    },
+    {
+      "key": "303B9CD7-CB5B-AB4A-80DC-12CB9FB10582.sonar.cs.scanner.telemetry",
+      "value": "C:\\Users\\ramir\\AngularApps\\Proyecto GPIS\\u-ride-backend\\.sonarqube\\out\\5\\Telemetry.json"
+    },
+    {
+      "key": "sonar.token",
+      "value": "***"
+    },
+    {
+      "key": "sonar.host.url",
+      "value": "http://localhost:9010"
+    },
+    {
+      "key": "sonar.visualstudio.enable",
+      "value": "false"
+    }
+  ]
+}

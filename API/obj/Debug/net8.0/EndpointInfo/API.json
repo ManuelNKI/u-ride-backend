@@ -1377,17 +1377,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SyncUserDto"
+                "$ref": "#/components/schemas/UpdateProfileDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SyncUserDto"
+                "$ref": "#/components/schemas/UpdateProfileDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SyncUserDto"
+                "$ref": "#/components/schemas/UpdateProfileDto"
               }
             }
           }
@@ -1472,17 +1472,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SyncUserDto"
+                "$ref": "#/components/schemas/UpdateProfileDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SyncUserDto"
+                "$ref": "#/components/schemas/UpdateProfileDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SyncUserDto"
+                "$ref": "#/components/schemas/UpdateProfileDto"
               }
             }
           }
@@ -2208,6 +2208,32 @@
           },
           "noSensitiveData": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateProfileDto": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "career": {
+            "type": "string",
+            "nullable": true
+          },
+          "zone": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "photoUrl": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

@@ -1,0 +1,6 @@
+projectKey=u-ride-frontend
+serverUrl=http://localhost:9010
+serverVersion=26.3.0.120487
+dashboardUrl=http://localhost:9010/dashboard?id=u-ride-frontend
+ceTaskId=5fd4f218-5c30-4d0a-8563-ad5641ea611c
+ceTaskUrl=http://localhost:9010/api/ce/task?id=5fd4f218-5c30-4d0a-8563-ad5641ea611c

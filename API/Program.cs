@@ -12,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Infrastructure (DbContext, Repositories, Services)
 builder.Services.AddInfrastructure(builder.Configuration);
 
+// Hosted Services
+builder.Services.AddHostedService<API.HostedServices.TripExpirationHostedService>();
+
 // Controllers + JSON camelCase + enum como string
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -123,6 +126,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles(); // Habilitar wwwroot para imágenes/evidencias
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
@@ -131,3 +135,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

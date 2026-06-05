@@ -22,6 +22,7 @@ public class CreateTripDto
     public VehicleInfoDto Vehicle { get; set; } = null!;
 
     // Reglas
+    public List<string>? RuleTexts { get; set; }
     public TripRulesDto Rules { get; set; } = null!;
 }
 

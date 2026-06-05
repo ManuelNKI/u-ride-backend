@@ -24,6 +24,19 @@ public interface ITripService
     Task<TripRuleDto> CreateRuleAsync(string text);
     Task<TripRuleDto> UpdateRuleAsync(Guid id, string text);
     Task DeleteRuleAsync(Guid id);
+
+    // ──── Tracking ────
+    void SetDriverLiveLocation(Guid tripId, DriverLocationDto location);
+    DriverLocationDto? GetDriverLiveLocation(Guid tripId);
+}
+
+public class DriverLocationDto
+{
+    public string DriverUid { get; set; } = null!;
+    public double Lat { get; set; }
+    public double Lng { get; set; }
+    public bool Active { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }
 
 // ──── DTOs para rutas y reglas ────

@@ -108,6 +108,37 @@ public class TripsController : ControllerBase
         return NoContent();
     }
 
+    // ═══════════════════ TRACKING ═══════════════════
+
+    /// <summary>
+    /// Actualiza la ubicación en tiempo real del conductor.
+    /// </summary>
+    [HttpPost("{id:guid}/live-location")]
+    [Authorize]
+    public IActionResult SetLiveLocation(Guid id, [FromBody] DriverLocationDto location)
+    {
+        var uid = GetFirebaseUid();
+        if (location.DriverUid != uid)
+            return Forbid();
+
+        _tripService.SetDriverLiveLocation(id, location);
+        return Ok();
+    }
+
+    /// <summary>
+    /// Obtiene la ubicación en tiempo real del conductor.
+    /// </summary>
+    [HttpGet("{id:guid}/live-location")]
+    [Authorize]
+    public ActionResult<DriverLocationDto> GetLiveLocation(Guid id)
+    {
+        var loc = _tripService.GetDriverLiveLocation(id);
+        if (loc is null)
+            return NotFound();
+
+        return Ok(loc);
+    }
+
     // ═══════════════════ ROUTES (Admin) ═══════════════════
 
     /// <summary>

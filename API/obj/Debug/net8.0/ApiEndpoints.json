@@ -805,7 +805,7 @@
       },
       {
         "Name": "dto",
-        "Type": "Application.DTOs.Users.SyncUserDto",
+        "Type": "Application.DTOs.Users.UpdateProfileDto",
         "IsRequired": true
       }
     ],
@@ -898,7 +898,7 @@
     "Parameters": [
       {
         "Name": "dto",
-        "Type": "Application.DTOs.Users.SyncUserDto",
+        "Type": "Application.DTOs.Users.UpdateProfileDto",
         "IsRequired": true
       }
     ],

@@ -10,14 +10,24 @@ namespace Infrastructure.Services;
 public class ReportService : IReportService
 {
     private readonly IUnitOfWork _uow;
+    private readonly INotificationService _notificationService;
 
-    public ReportService(IUnitOfWork uow)
+    public ReportService(IUnitOfWork uow, INotificationService notificationService)
     {
         _uow = uow;
+        _notificationService = notificationService;
     }
 
     public async Task<ReportDto> CreateReportAsync(string reporterUid, CreateReportDto dto)
     {
+        // Validar: un solo reporte por viaje por usuario
+        if (dto.TripId.HasValue)
+        {
+            var yaReporto = await _uow.Reports.HasReportedForTripAsync(reporterUid, dto.TripId.Value);
+            if (yaReporto)
+                throw new InvalidOperationException("Ya has enviado un reporte para este viaje.");
+        }
+
         var report = new Report
         {
             Id = Guid.NewGuid(),
@@ -33,8 +43,31 @@ public class ReportService : IReportService
         await _uow.Reports.AddAsync(report);
         await _uow.SaveChangesAsync();
 
+        // Notificar a todos los administradores del sistema
+        try
+        {
+            var allUsers = await _uow.Users.GetAllAsync(1, 500);
+            var admins = allUsers.Where(u => u.IsAdmin).ToList();
+            foreach (var admin in admins)
+            {
+                await _notificationService.SendNotificationAsync(
+                    userUid: admin.FirebaseUid,
+                    title: "Nuevo Reporte",
+                    message: $"Se ha recibido un nuevo reporte. Motivo: {dto.Reason}",
+                    type: NotificationType.System
+                );
+            }
+        }
+        catch { /* best-effort */ }
+
         return MapToDto(report);
     }
+
+    public async Task<bool> HasReportedForTripAsync(string reporterUid, Guid tripId)
+        => await _uow.Reports.HasReportedForTripAsync(reporterUid, tripId);
+
+    public async Task<bool> HasReportedUserForTripAsync(string reporterUid, Guid tripId, string reportedUid)
+        => await _uow.Reports.HasReportedUserForTripAsync(reporterUid, tripId, reportedUid);
 
     public async Task<PagedResultDto<ReportDto>> GetAllAsync(int page, int pageSize)
     {
@@ -74,6 +107,69 @@ public class ReportService : IReportService
             {
                 user.SuspendedUntil = DateTime.UtcNow.AddDays(7); // Suspensión de 7 días por defecto
                 _uow.Users.Update(user);
+
+                var openReports = await _uow.Reports.GetByReportedUidAsync(report.ReportedUid);
+                foreach (var r in openReports.Where(x => x.Id != report.Id && x.Status == ReportStatus.Open))
+                {
+                    r.Status = ReportStatus.Resolved;
+                    r.Action = ReportAction.Suspended;
+                    r.AdminNotes = "[Auto-resuelto porque la cuenta fue suspendida en otro reporte]";
+                    _uow.Reports.Update(r);
+                }
+            }
+            
+            await _notificationService.SendNotificationAsync(
+                userUid: report.ReportedUid,
+                title: "Cuenta Suspendida",
+                message: "Tu cuenta ha sido suspendida por 7 días debido a un reporte en tu contra.",
+                type: NotificationType.System
+            );
+        }
+        else if (reportAction == ReportAction.Warned)
+        {
+            var thirtyDaysAgo = DateTime.UtcNow.AddDays(-30);
+            var recentReports = await _uow.Reports.GetByReportedUidAsync(report.ReportedUid);
+            var recentWarnings = recentReports.Count(r => 
+                r.Action == ReportAction.Warned && 
+                r.UpdatedAt >= thirtyDaysAgo) + 1; // +1 to include this new warning
+
+            if (recentWarnings >= 3)
+            {
+                // Auto suspend instead
+                report.Action = ReportAction.Suspended;
+                report.AdminNotes = (adminNotes + " [Auto-suspendido por acumular 3 advertencias en 30 días]").Trim();
+                
+                var user = await _uow.Users.GetByUidAsync(report.ReportedUid);
+                if (user is not null)
+                {
+                    user.SuspendedUntil = DateTime.UtcNow.AddDays(7);
+                    _uow.Users.Update(user);
+
+                    foreach (var r in recentReports.Where(x => x.Id != report.Id && x.Status == ReportStatus.Open))
+                    {
+                        r.Status = ReportStatus.Resolved;
+                        r.Action = ReportAction.Suspended;
+                        r.AdminNotes = "[Auto-resuelto porque la cuenta fue suspendida automáticamente por límite de advertencias]";
+                        _uow.Reports.Update(r);
+                    }
+                }
+
+                await _notificationService.SendNotificationAsync(
+                    userUid: report.ReportedUid,
+                    title: "Cuenta Suspendida",
+                    message: $"Has acumulado {recentWarnings} advertencias en el último mes. Tu cuenta ha sido suspendida por 7 días automáticamente.",
+                    type: NotificationType.System
+                );
+            }
+            else
+            {
+                int warningsLeft = 3 - recentWarnings;
+                await _notificationService.SendNotificationAsync(
+                    userUid: report.ReportedUid,
+                    title: "Advertencia",
+                    message: $"Has recibido una advertencia debido a un reporte. Acumulas {recentWarnings} advertencia(s) en el último mes. A las 3 advertencias tu cuenta será suspendida (te faltan {warningsLeft}).",
+                    type: NotificationType.System
+                );
             }
         }
 

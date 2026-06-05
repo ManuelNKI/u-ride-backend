@@ -65,6 +65,17 @@ public class TripRequestsController : ControllerBase
     }
 
     /// <summary>
+    /// El pasajero paga su solicitud aceptada.
+    /// </summary>
+    [HttpPatch("{id:guid}/pay")]
+    public async Task<ActionResult<TripRequestDto>> Pay(Guid id)
+    {
+        var uid = GetFirebaseUid();
+        var result = await _requestService.PayRequestAsync(id, uid);
+        return Ok(result);
+    }
+
+    /// <summary>
     /// Obtiene todas las solicitudes de un viaje (para el conductor).
     /// </summary>
     [HttpGet("trip/{tripId:guid}")]

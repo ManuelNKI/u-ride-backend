@@ -5,19 +5,47 @@ using Application.Services;
 using Domain.Entities;
 using Domain.Enums;
 
+using System.Collections.Concurrent;
+
 namespace Infrastructure.Services;
 
 public class TripService : ITripService
 {
     private readonly IUnitOfWork _uow;
+    private static readonly ConcurrentDictionary<Guid, DriverLocationDto> _liveLocations = new();
 
     public TripService(IUnitOfWork uow)
     {
         _uow = uow;
     }
 
+    public void SetDriverLiveLocation(Guid tripId, DriverLocationDto location)
+    {
+        location.UpdatedAt = DateTime.UtcNow;
+        _liveLocations[tripId] = location;
+    }
+
+    public DriverLocationDto? GetDriverLiveLocation(Guid tripId)
+    {
+        _liveLocations.TryGetValue(tripId, out var loc);
+        return loc;
+    }
+
     public async Task<TripDto> CreateTripAsync(string driverUid, string driverName, CreateTripDto dto)
     {
+        var driver = await _uow.Users.GetByUidAsync(driverUid) 
+            ?? throw new InvalidOperationException("Driver not found.");
+
+        if (driver.SuspendedUntil.HasValue && driver.SuspendedUntil.Value > DateTime.UtcNow)
+        {
+            throw new InvalidOperationException($"Tu cuenta está suspendida hasta {driver.SuspendedUntil.Value:dd/MM/yyyy HH:mm} UTC y no puedes publicar viajes.");
+        }
+
+        if (driver.Disabled)
+        {
+            throw new InvalidOperationException("Tu cuenta está desactivada y no puedes publicar viajes.");
+        }
+
         var trip = new Trip
         {
             Id = Guid.NewGuid(),
@@ -37,6 +65,7 @@ public class TripService : ITripService
             Price = dto.Price,
             Notes = dto.Notes,
             Status = TripStatus.Open,
+            RuleTexts = dto.RuleTexts ?? new List<string>(),
             Vehicle = new VehicleInfo
             {
                 Plate = dto.Vehicle.Plate,
@@ -55,13 +84,9 @@ public class TripService : ITripService
         await _uow.Trips.AddAsync(trip);
 
         // Incrementar conteo de viajes del conductor
-        var driver = await _uow.Users.GetByUidAsync(driverUid);
-        if (driver is not null)
-        {
-            driver.DriverTripsCount++;
-            driver.TripsCount++;
-            _uow.Users.Update(driver);
-        }
+        driver.DriverTripsCount++;
+        driver.TripsCount++;
+        _uow.Users.Update(driver);
 
         await _uow.SaveChangesAsync();
         return MapToDto(trip);
@@ -145,6 +170,7 @@ public class TripService : ITripService
         if (dto.SeatsAvailable.HasValue) trip.SeatsAvailable = dto.SeatsAvailable.Value;
         if (dto.Price.HasValue) trip.Price = dto.Price.Value;
         if (dto.Notes is not null) trip.Notes = dto.Notes;
+        if (dto.RuleTexts is not null) trip.RuleTexts = dto.RuleTexts;
 
         if (dto.Vehicle is not null)
         {
@@ -276,6 +302,7 @@ public class TripService : ITripService
         Notes = trip.Notes,
         Status = trip.Status.ToString().ToLowerInvariant(),
         ConfirmedPassengerUids = trip.ConfirmedPassengerUids,
+        RuleTexts = trip.RuleTexts,
         Vehicle = new VehicleInfoDto
         {
             Plate = trip.Vehicle.Plate,
