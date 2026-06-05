@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
 using API.Middlewares;
+using Application.Services;
 using Infrastructure;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -11,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Infrastructure (DbContext, Repositories, Services)
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// PayPal (Checkout / Orders API)
+builder.Services.AddHttpClient<IPayPalCheckoutService, PayPalCheckoutService>();
 
 // Controllers + JSON camelCase + enum como string
 builder.Services.AddControllers()

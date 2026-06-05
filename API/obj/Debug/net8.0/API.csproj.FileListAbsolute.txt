@@ -760,7 +760,6 @@ C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\staticwebassets.b
 C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\staticwebassets.development.json
 C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\API.csproj.Up2Date
 C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\API.dll
 C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\refint\API.dll
@@ -957,3 +956,37 @@ C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\bin\Debug\net8.0\Sys
 C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
 C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
 C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\API\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\API.staticwebassets.runtime.json
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\CloudinaryDotNet.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.CommandLine.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Configuration.UserSecrets.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Hosting.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Configuration.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Console.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Logging.Debug.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Logging.EventLog.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Logging.EventSource.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\System.IO.Pipelines.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\System.Text.Encodings.Web.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\System.Text.Json.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\API\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
