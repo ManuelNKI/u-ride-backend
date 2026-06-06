@@ -52,7 +52,6 @@
           "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.300"
-        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -141,7 +140,6 @@
           "auditMode": "direct"
         },
         "SdkAnalysisLevel": "9.0.300"
-        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -206,7 +204,6 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
@@ -276,7 +273,6 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
         "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
