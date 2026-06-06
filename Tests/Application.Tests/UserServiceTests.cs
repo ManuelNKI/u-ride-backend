@@ -16,6 +16,7 @@ namespace Application.Tests.Services
         private readonly Mock<IUnitOfWork> _uowMock;
         private readonly Mock<IUserRepository> _userRepoMock;
         private readonly Mock<ICloudinaryService> _cloudinaryMock;
+        private readonly Mock<INotificationService> _notificationMock;
         private readonly UserService _userService;
 
         public UserServiceTests()
@@ -23,9 +24,11 @@ namespace Application.Tests.Services
             _uowMock = new Mock<IUnitOfWork>();
             _userRepoMock = new Mock<IUserRepository>();
             _cloudinaryMock = new Mock<ICloudinaryService>();
+            _notificationMock = new Mock<INotificationService>();
             _uowMock.Setup(u => u.Users).Returns(_userRepoMock.Object);
-            _userService = new UserService(_uowMock.Object, _cloudinaryMock.Object);
+            _userService = new UserService(_uowMock.Object, _cloudinaryMock.Object, _notificationMock.Object);
         }
+
 
         [Fact]
         public async Task SyncUserAsync_NewUser_ShouldCreateUserInRepository()

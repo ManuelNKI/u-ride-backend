@@ -26,8 +26,32 @@ public class ReportsController : ControllerBase
     public async Task<ActionResult<ReportDto>> Create([FromBody] CreateReportDto dto)
     {
         var uid = GetFirebaseUid();
-        var report = await _reportService.CreateReportAsync(uid, dto);
-        return Created(string.Empty, report);
+        try
+        {
+            var report = await _reportService.CreateReportAsync(uid, dto);
+            return Created(string.Empty, report);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Verifica si el usuario autenticado ya ha enviado un reporte para un viaje específico.
+    /// Si se provee reportedUid, verifica específicamente contra ese usuario.
+    /// GET /api/reports/has-reported?tripId={guid}&amp;reportedUid={uid}
+    /// </summary>
+    [HttpGet("has-reported")]
+    public async Task<ActionResult<bool>> HasReported([FromQuery] Guid tripId, [FromQuery] string? reportedUid = null)
+    {
+        var uid = GetFirebaseUid();
+        bool result;
+        if (!string.IsNullOrEmpty(reportedUid))
+            result = await _reportService.HasReportedUserForTripAsync(uid, tripId, reportedUid);
+        else
+            result = await _reportService.HasReportedForTripAsync(uid, tripId);
+        return Ok(result);
     }
 
     /// <summary>

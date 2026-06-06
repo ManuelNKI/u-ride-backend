@@ -6,5 +6,6 @@ public enum TripStatus
     InProgress,
     Closed,
     Cancelled,
-    Completed
+    Completed,
+    Expired
 }

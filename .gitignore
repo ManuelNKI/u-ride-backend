@@ -8,3 +8,14 @@ obj/
 **/*.sln.docstates
 **/appsettings.Development.json
 **/appsettings.json
+
+# Archivos de compilación y temporales
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.docstates
+*.cache
+*.assets.json
+.vs/
+.vscode/
