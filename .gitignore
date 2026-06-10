@@ -19,3 +19,8 @@ obj/
 *.assets.json
 .vs/
 .vscode/
+
+# Resultados de pruebas y cobertura
+[Tt]est[Rr]esults/
+coveragereport/
+*.cobertura.xml
