@@ -46,18 +46,6 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE S
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\Domain.pdb
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Domain\obj\Debug\net8.0\ref\Domain.dll
 C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\obj\Debug\net8.0\Domain.sourcelink.json
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\bin\Debug\net8.0\Domain.deps.json
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\bin\Debug\net8.0\Domain.dll
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\bin\Debug\net8.0\Domain.pdb
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.sourcelink.json
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.dll
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\refint\Domain.dll
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.pdb
-C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\ref\Domain.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Domain\bin\Debug\net8.0\Domain.deps.json
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Domain\bin\Debug\net8.0\Domain.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Domain\bin\Debug\net8.0\Domain.pdb
@@ -70,3 +58,18 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Softw
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Domain\obj\Debug\net8.0\refint\Domain.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Domain\obj\Debug\net8.0\Domain.pdb
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Domain\obj\Debug\net8.0\ref\Domain.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\bin\Debug\net8.0\Domain.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\bin\Debug\net8.0\Domain.pdb
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\Domain.pdb
+C:\GestionPruebas\Proyecto\u-ride-backend\Domain\obj\Debug\net8.0\ref\Domain.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Tests\API.IntegrationTests\TestResults\CoberturaIntegracion\Domain.deps.json
+C:\GestionPruebas\Proyecto\u-ride-backend\Tests\API.IntegrationTests\TestResults\CoberturaIntegracion\Domain.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Tests\API.IntegrationTests\TestResults\CoberturaIntegracion\Domain.pdb

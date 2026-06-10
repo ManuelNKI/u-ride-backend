@@ -1,5 +1,62 @@
 [
   {
+    "ContainingType": "API.Controllers.AppealsController",
+    "Method": "CreateAppeal",
+    "RelativePath": "api/Appeals",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.DTOs.Appeals.CreateAppealDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AppealsController",
+    "Method": "GetAllAppeals",
+    "RelativePath": "api/Appeals",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AppealsController",
+    "Method": "ProcessAppeal",
+    "RelativePath": "api/Appeals/{id}/process",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "Application.DTOs.Appeals.ProcessAppealDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "API.Controllers.AppealsController",
+    "Method": "GetMyAppeals",
+    "RelativePath": "api/Appeals/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "API.Controllers.NotificationsController",
     "Method": "GetMyNotifications",
     "RelativePath": "api/Notifications",
@@ -187,6 +244,37 @@
     "ReturnTypes": [
       {
         "Type": "Application.DTOs.Reports.ReportDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "API.Controllers.ReportsController",
+    "Method": "HasReported",
+    "RelativePath": "api/Reports/has-reported",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tripId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "reportedUid",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Boolean",
         "MediaTypes": [
           "text/plain",
           "application/json",

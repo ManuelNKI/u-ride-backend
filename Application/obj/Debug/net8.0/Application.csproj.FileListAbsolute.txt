@@ -62,22 +62,6 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE S
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Application\obj\Debug\net8.0\Application.pdb
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\GESTION E IMPLANTACIÓN DE SOFWARE\Primera Entrega\u-ride-backend\Application\obj\Debug\net8.0\ref\Application.dll
 C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Application\obj\Debug\net8.0\Application.sourcelink.json
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Application.deps.json
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Application.dll
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Application.pdb
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Domain.dll
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Domain.pdb
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.csproj.AssemblyReference.cache
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.sourcelink.json
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Applicat.44B5EDA2.Up2Date
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.dll
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\refint\Application.dll
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.pdb
-C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\ref\Application.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Application\bin\Debug\net8.0\Application.deps.json
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Application\bin\Debug\net8.0\Application.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Application\bin\Debug\net8.0\Application.pdb
@@ -94,3 +78,22 @@ C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Softw
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Application\obj\Debug\net8.0\refint\Application.dll
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Application\obj\Debug\net8.0\Application.pdb
 C:\Users\Cristian Jurado\Documents\UTA\6TO SOFTWARE\Gestion e Implantacion Software\proyecto final\u-ride-backend\Application\obj\Debug\net8.0\ref\Application.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Application.deps.json
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Application.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Application.pdb
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Domain.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\bin\Debug\net8.0\Domain.pdb
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.csproj.AssemblyReference.cache
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.sourcelink.json
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Applicat.44B5EDA2.Up2Date
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\refint\Application.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\Application.pdb
+C:\GestionPruebas\Proyecto\u-ride-backend\Application\obj\Debug\net8.0\ref\Application.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Tests\API.IntegrationTests\TestResults\CoberturaIntegracion\Application.deps.json
+C:\GestionPruebas\Proyecto\u-ride-backend\Tests\API.IntegrationTests\TestResults\CoberturaIntegracion\Application.dll
+C:\GestionPruebas\Proyecto\u-ride-backend\Tests\API.IntegrationTests\TestResults\CoberturaIntegracion\Application.pdb
