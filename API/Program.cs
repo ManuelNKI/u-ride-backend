@@ -17,6 +17,9 @@ builder.Services.AddInfrastructure(builder.Configuration);
 // PayPal (Checkout / Orders API)
 builder.Services.AddHttpClient<IPayPalCheckoutService, PayPalCheckoutService>();
 
+// Hosted Services
+builder.Services.AddHostedService<API.HostedServices.TripExpirationHostedService>();
+
 // Controllers + JSON camelCase + enum como string
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
