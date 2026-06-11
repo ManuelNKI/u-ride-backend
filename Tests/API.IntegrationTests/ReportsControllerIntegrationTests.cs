@@ -1,4 +1,4 @@
-﻿using API.Controllers;
+using API.Controllers;
 using Application.DTOs.Common;
 using Application.DTOs.Reports;
 using Application.Services;
@@ -155,7 +155,7 @@ public class ReportsControllerIntegrationTests : IClassFixture<TestWebApplicatio
         var expectedResult = new ReportDto { Id = reportId, Status = "resolved" };
 
         _reportServiceMock
-            .Setup(s => s.ResolveReportAsync(reportId, request.Action, request.AdminNotes))
+            .Setup(s => s.ResolveReportAsync(reportId, request.Action, request.AdminNotes, It.IsAny<int?>()))
             .ReturnsAsync(expectedResult);
 
         // Act
