@@ -1,7 +1,7 @@
 .git
 .vs
-bin/
-obj/
+[Bb]in/
+[Oo]bj/
 **/*.user
 **/*.suo
 **/*.userosscache
@@ -10,11 +10,6 @@ obj/
 **/appsettings.json
 
 # Archivos de compilación y temporales
-bin/
-obj/
-*.user
-*.userosscache
-*.sln.docstates
 *.cache
 *.assets.json
 .vs/
