@@ -8,6 +8,7 @@ public interface ITripRequestService
     Task<TripRequestDto> AcceptRequestAsync(Guid requestId, string driverUid);
     Task<TripRequestDto> RejectRequestAsync(Guid requestId, string driverUid);
     Task<TripRequestDto> CancelRequestAsync(Guid requestId, string passengerUid);
+    Task<TripRequestDto> PayRequestAsync(Guid requestId, string passengerUid);
     Task<List<TripRequestDto>> GetByTripIdAsync(Guid tripId);
     Task<List<TripRequestDto>> GetByPassengerAsync(string passengerUid);
 }

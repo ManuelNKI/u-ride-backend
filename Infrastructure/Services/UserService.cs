@@ -9,10 +9,16 @@ namespace Infrastructure.Services;
 public class UserService : IUserService
 {
     private readonly IUnitOfWork _uow;
+    private readonly ICloudinaryService _cloudinary;
+    private readonly INotificationService _notificationService;
+    private readonly ITripService _tripService;
 
-    public UserService(IUnitOfWork uow)
+    public UserService(IUnitOfWork uow, ICloudinaryService cloudinary, INotificationService notificationService, ITripService tripService)
     {
         _uow = uow;
+        _cloudinary = cloudinary;
+        _notificationService = notificationService;
+        _tripService = tripService;
     }
 
     /// <summary>
@@ -21,43 +27,95 @@ public class UserService : IUserService
     /// </summary>
     public async Task<UserProfileDto> SyncUserAsync(SyncUserDto dto)
     {
-        // Asegurar que displayName nunca sea null o vacío para la BD, y truncar a 200 chars
         var displayName = string.IsNullOrWhiteSpace(dto.DisplayName) ? null : dto.DisplayName.Trim();
         if (displayName is not null && displayName.Length > 200)
             displayName = displayName[..200];
 
+        // 1. Intentar buscar por FirebaseUid primero
         var user = await _uow.Users.GetByUidAsync(dto.FirebaseUid);
 
         if (user is null)
         {
-            user = new User
+            // 2. SOLUCIÓN AL DUPLICADO: Si no se halla por UID, buscar por Email antes de insertar
+            // Nota: Asegúrate de tener un método para buscar por email en tu repositorio, o haz la consulta pertinente.
+            user = await _uow.Users.GetByEmailAsync(dto.Email);
+
+            if (user is null)
             {
-                FirebaseUid = dto.FirebaseUid,
-                Email = dto.Email,
-                EmailVerified = dto.EmailVerified,
-                DisplayName = displayName ?? dto.Email, // fallback al email si no hay nombre
-                Career = dto.Career,
-                Zone = dto.Zone,
-                Phone = dto.Phone,
-                PhotoUrl = dto.PhotoUrl
-            };
-            await _uow.Users.AddAsync(user);
+                // CASO A: El usuario es genuinamente nuevo (No existe el UID ni el Email) -> INSERT
+                user = new User
+                {
+                    FirebaseUid = dto.FirebaseUid,
+                    Email = dto.Email,
+                    EmailVerified = dto.EmailVerified,
+                    DisplayName = displayName ?? dto.Email,
+                    Career = string.IsNullOrWhiteSpace(dto.Career) ? "Por definir" : dto.Career.Trim(),
+                    Zone = string.IsNullOrWhiteSpace(dto.Zone) ? "Por definir" : dto.Zone.Trim(),
+                    Phone = string.IsNullOrWhiteSpace(dto.Phone) ? "" : dto.Phone.Trim(),
+                    PhotoUrl = dto.PhotoUrl
+                };
+                await _uow.Users.AddAsync(user);
+            }
+            else
+            {
+                // CASO B: El correo ya existía pero con otro UID (vínculo roto Firebase-SQL) -> UPDATE DE SEGURIDAD
+                // Vinculamos el nuevo UID de Firebase al registro que ya teníamos en SQL Server
+                user.FirebaseUid = dto.FirebaseUid;
+                user.EmailVerified = dto.EmailVerified;
+
+                if (displayName is not null)
+                    user.DisplayName = displayName;
+
+                user.Career = dto.Career ?? user.Career;
+                user.Zone = dto.Zone ?? user.Zone;
+                user.Phone = dto.Phone ?? user.Phone;
+                user.PhotoUrl = dto.PhotoUrl ?? user.PhotoUrl;
+
+                _uow.Users.Update(user);
+            }
         }
         else
         {
+            // CASO C: El usuario existe con su UID correcto -> UPDATE clásico
             user.Email = dto.Email;
             user.EmailVerified = dto.EmailVerified;
-            // Solo actualizar DisplayName si el nuevo valor no está vacío
+
             if (displayName is not null)
                 user.DisplayName = displayName;
+
             user.Career = dto.Career ?? user.Career;
             user.Zone = dto.Zone ?? user.Zone;
             user.Phone = dto.Phone ?? user.Phone;
             user.PhotoUrl = dto.PhotoUrl ?? user.PhotoUrl;
+
             _uow.Users.Update(user);
         }
 
-        await _uow.SaveChangesAsync();
+        try
+        {
+            await _uow.SaveChangesAsync();
+        }
+        catch (Microsoft.EntityFrameworkCore.DbUpdateException ex)
+        {
+            if (ex.InnerException?.Message.Contains("Violation of PRIMARY KEY constraint") == true)
+            {
+                // Un request concurrente ya insertó a este usuario.
+                // Como es una sincronización, devolvemos el DTO simulando éxito.
+                return new UserProfileDto 
+                {
+                    FirebaseUid = dto.FirebaseUid,
+                    Email = dto.Email,
+                    EmailVerified = dto.EmailVerified,
+                    DisplayName = displayName ?? dto.Email,
+                    Career = dto.Career ?? "Por definir",
+                    Zone = dto.Zone ?? "Por definir",
+                    Phone = dto.Phone ?? "",
+                    PhotoUrl = dto.PhotoUrl
+                };
+            }
+            throw;
+        }
+
         return MapToDto(user);
     }
 
@@ -67,16 +125,29 @@ public class UserService : IUserService
         return user is null ? null : MapToDto(user);
     }
 
-    public async Task<UserProfileDto> UpdateProfileAsync(string firebaseUid, SyncUserDto dto)
+    public async Task<UserProfileDto> UpdateProfileAsync(string firebaseUid, UpdateProfileDto dto)
     {
         var user = await _uow.Users.GetByUidAsync(firebaseUid)
             ?? throw new KeyNotFoundException($"User {firebaseUid} not found.");
 
-        user.DisplayName = dto.DisplayName;
-        user.Career = dto.Career;
-        user.Zone = dto.Zone;
-        user.Phone = dto.Phone;
-        user.PhotoUrl = dto.PhotoUrl;
+        if (!string.IsNullOrWhiteSpace(dto.DisplayName)) user.DisplayName = dto.DisplayName;
+        if (dto.Career is not null) user.Career = dto.Career;
+        if (dto.Zone is not null) user.Zone = dto.Zone;
+        if (dto.Phone is not null) user.Phone = dto.Phone;
+        
+        if (dto.PhotoUrl is not null)
+        {
+            if (!string.IsNullOrWhiteSpace(user.PhotoUrl) && user.PhotoUrl != dto.PhotoUrl && user.PhotoUrl.Contains("cloudinary.com"))
+            {
+                var publicId = ExtractPublicIdFromUrl(user.PhotoUrl);
+                if (!string.IsNullOrWhiteSpace(publicId))
+                {
+                    await _cloudinary.DeleteImageAsync(publicId);
+                }
+            }
+            user.PhotoUrl = dto.PhotoUrl;
+        }
+        
         _uow.Users.Update(user);
 
         await _uow.SaveChangesAsync();
@@ -90,7 +161,35 @@ public class UserService : IUserService
 
         user.SuspendedUntil = until;
         _uow.Users.Update(user);
+
+        var openReports = await _uow.Reports.GetByReportedUidAsync(firebaseUid);
+        foreach (var r in openReports.Where(x => x.Status == Domain.Enums.ReportStatus.Open))
+        {
+            r.Status = Domain.Enums.ReportStatus.Resolved;
+            r.Action = Domain.Enums.ReportAction.Suspended;
+            r.AdminNotes = "[Auto-resuelto por suspensión manual de cuenta por administrador]";
+            _uow.Reports.Update(r);
+        }
+
         await _uow.SaveChangesAsync();
+        await _tripService.CancelFutureTripsForUserAsync(firebaseUid);
+    }
+
+    public async Task UnsuspendUserAsync(string firebaseUid)
+    {
+        var user = await _uow.Users.GetByUidAsync(firebaseUid)
+            ?? throw new KeyNotFoundException($"User {firebaseUid} not found.");
+
+        user.SuspendedUntil = null;
+        _uow.Users.Update(user);
+        await _uow.SaveChangesAsync();
+
+        await _notificationService.SendNotificationAsync(
+            userUid: firebaseUid,
+            title: "Suspensión Levantada",
+            message: "Tu tiempo de suspensión ha terminado. Ya puedes volver a usar tu cuenta normalmente.",
+            type: Domain.Enums.NotificationType.System
+        );
     }
 
     // ──── Admin ────
@@ -109,7 +208,7 @@ public class UserService : IUserService
         };
     }
 
-    public async Task<UserProfileDto> AdminUpdateProfileAsync(string firebaseUid, SyncUserDto dto)
+    public async Task<UserProfileDto> AdminUpdateProfileAsync(string firebaseUid, UpdateProfileDto dto)
     {
         var user = await _uow.Users.GetByUidAsync(firebaseUid)
             ?? throw new KeyNotFoundException($"User {firebaseUid} not found.");
@@ -118,6 +217,7 @@ public class UserService : IUserService
         if (dto.Career is not null) user.Career = dto.Career;
         if (dto.Zone is not null) user.Zone = dto.Zone;
         if (dto.Phone is not null) user.Phone = dto.Phone;
+        if (dto.PhotoUrl is not null) user.PhotoUrl = dto.PhotoUrl;
         _uow.Users.Update(user);
 
         await _uow.SaveChangesAsync();
@@ -158,4 +258,45 @@ public class UserService : IUserService
         CreatedAt = user.CreatedAt,
         UpdatedAt = user.UpdatedAt
     };
+
+    private static string? ExtractPublicIdFromUrl(string url)
+    {
+        try
+        {
+            var uri = new Uri(url);
+            var segments = uri.Segments;
+            
+            int uploadIndex = -1;
+            for (int i = 0; i < segments.Length; i++)
+            {
+                if (segments[i].TrimEnd('/') == "upload")
+                {
+                    uploadIndex = i;
+                    break;
+                }
+            }
+
+            if (uploadIndex != -1 && uploadIndex < segments.Length - 1)
+            {
+                var pathSegments = segments.Skip(uploadIndex + 1).Select(s => s.TrimEnd('/'));
+                var path = string.Join("/", pathSegments);
+                
+                var parts = path.Split('/');
+                if (parts.Length > 1 && parts[0].StartsWith("v") && parts[0].Length > 1 && char.IsDigit(parts[0][1]))
+                {
+                    path = string.Join("/", parts.Skip(1));
+                }
+
+                var lastDot = path.LastIndexOf('.');
+                if (lastDot > 0)
+                {
+                    path = path.Substring(0, lastDot);
+                }
+                
+                return Uri.UnescapeDataString(path);
+            }
+        }
+        catch { }
+        return null;
+    }
 }

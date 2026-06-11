@@ -2,9 +2,20 @@
 .vs
 [Bb]in/
 [Oo]bj/
+**/*.user
+**/*.suo
+**/*.userosscache
+**/*.sln.docstates
+**/appsettings.Development.json
+**/appsettings.json
+
+# Archivos de compilación y temporales
+*.cache
+*.assets.json
+.vs/
+.vscode/
+
+# Resultados de pruebas y cobertura
+[Tt]est[Rr]esults/
 coveragereport/
-*.user
-*.userosscache
-*.sln.docstates
-*.suo
-TestResults/
+*.cobertura.xml

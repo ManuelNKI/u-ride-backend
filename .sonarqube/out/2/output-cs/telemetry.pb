@@ -1,0 +1,1 @@
+iR\C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Infrastructure\Infrastructure.csprojòCSharp12

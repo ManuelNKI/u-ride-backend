@@ -22,7 +22,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Notification> Notifications => Set<Notification>();
     public DbSet<TripRoute> TripRoutes => Set<TripRoute>();
     public DbSet<TripRule> TripRules => Set<TripRule>();
-
+    public DbSet<Vehicle> Vehicles => Set<Vehicle>();
+    public DbSet<Appeal> Appeals => Set<Appeal>();
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

@@ -17,6 +17,7 @@ public interface ITripRepository
         string? destinationZone,
         DateTime? departureDate);
     Task<List<Trip>> GetByDriverUidAsync(string driverUid);
+    Task<List<Trip>> GetActiveByDriverUidAsync(string driverUid);
     Task AddAsync(Trip trip);
     void Update(Trip trip);
     void Delete(Trip trip);

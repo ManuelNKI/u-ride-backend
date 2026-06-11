@@ -5,19 +5,49 @@ using Application.Services;
 using Domain.Entities;
 using Domain.Enums;
 
+using System.Collections.Concurrent;
+
 namespace Infrastructure.Services;
 
 public class TripService : ITripService
 {
     private readonly IUnitOfWork _uow;
+    private readonly INotificationService _notifications;
+    private static readonly ConcurrentDictionary<Guid, DriverLocationDto> _liveLocations = new();
 
-    public TripService(IUnitOfWork uow)
+    public TripService(IUnitOfWork uow, INotificationService notifications)
     {
         _uow = uow;
+        _notifications = notifications;
+    }
+
+    public void SetDriverLiveLocation(Guid tripId, DriverLocationDto location)
+    {
+        location.UpdatedAt = DateTime.UtcNow;
+        _liveLocations[tripId] = location;
+    }
+
+    public DriverLocationDto? GetDriverLiveLocation(Guid tripId)
+    {
+        _liveLocations.TryGetValue(tripId, out var loc);
+        return loc;
     }
 
     public async Task<TripDto> CreateTripAsync(string driverUid, string driverName, CreateTripDto dto)
     {
+        var driver = await _uow.Users.GetByUidAsync(driverUid) 
+            ?? throw new InvalidOperationException("Driver not found.");
+
+        if (driver.SuspendedUntil.HasValue && driver.SuspendedUntil.Value > DateTime.UtcNow)
+        {
+            throw new InvalidOperationException($"Tu cuenta está suspendida hasta {driver.SuspendedUntil.Value:dd/MM/yyyy HH:mm} UTC y no puedes publicar viajes.");
+        }
+
+        if (driver.Disabled)
+        {
+            throw new InvalidOperationException("Tu cuenta está desactivada y no puedes publicar viajes.");
+        }
+
         var trip = new Trip
         {
             Id = Guid.NewGuid(),
@@ -37,6 +67,7 @@ public class TripService : ITripService
             Price = dto.Price,
             Notes = dto.Notes,
             Status = TripStatus.Open,
+            RuleTexts = dto.RuleTexts ?? new List<string>(),
             Vehicle = new VehicleInfo
             {
                 Plate = dto.Vehicle.Plate,
@@ -55,13 +86,9 @@ public class TripService : ITripService
         await _uow.Trips.AddAsync(trip);
 
         // Incrementar conteo de viajes del conductor
-        var driver = await _uow.Users.GetByUidAsync(driverUid);
-        if (driver is not null)
-        {
-            driver.DriverTripsCount++;
-            driver.TripsCount++;
-            _uow.Users.Update(driver);
-        }
+        driver.DriverTripsCount++;
+        driver.TripsCount++;
+        _uow.Users.Update(driver);
 
         await _uow.SaveChangesAsync();
         return MapToDto(trip);
@@ -102,6 +129,12 @@ public class TripService : ITripService
         return trips.Select(MapToDto).ToList();
     }
 
+    public async Task<List<TripDto>> GetActiveTripsAsync(string driverUid)
+    {
+        var trips = await _uow.Trips.GetActiveByDriverUidAsync(driverUid);
+        return trips.Select(MapToDto).ToList();
+    }
+
     public async Task<TripDto> UpdateStatusAsync(Guid tripId, string driverUid, string newStatus)
     {
         var trip = await _uow.Trips.GetByIdAsync(tripId)
@@ -113,9 +146,48 @@ public class TripService : ITripService
         if (!Enum.TryParse<TripStatus>(newStatus, true, out var status))
             throw new ArgumentException($"Invalid trip status: {newStatus}");
 
+        if (status == TripStatus.InProgress)
+        {
+            var driver = await _uow.Users.GetByUidAsync(driverUid);
+            if (driver?.SuspendedUntil.HasValue == true && driver.SuspendedUntil.Value > DateTime.UtcNow)
+            {
+                throw new InvalidOperationException($"Tu cuenta está suspendida hasta {driver.SuspendedUntil.Value:dd/MM/yyyy HH:mm} UTC y no puedes iniciar viajes.");
+            }
+            if (driver?.Disabled == true)
+            {
+                throw new InvalidOperationException("Tu cuenta está desactivada y no puedes iniciar viajes.");
+            }
+        }
+
+        var oldStatus = trip.Status;
         trip.Status = status;
         _uow.Trips.Update(trip);
         await _uow.SaveChangesAsync();
+
+        if (oldStatus != status)
+        {
+            if (status == TripStatus.InProgress)
+            {
+                foreach (var uid in trip.ConfirmedPassengerUids)
+                {
+                    await _notifications.SendNotificationAsync(uid, "Viaje Iniciado", $"El conductor {trip.DriverName} ha iniciado el viaje.", Domain.Enums.NotificationType.TripStarted, trip.Id, trip.DriverUid, trip.DriverName);
+                }
+            }
+            else if (status == TripStatus.Completed)
+            {
+                foreach (var uid in trip.ConfirmedPassengerUids)
+                {
+                    await _notifications.SendNotificationAsync(uid, "Viaje Finalizado", $"El viaje con {trip.DriverName} ha terminado. ¡No olvides calificarlo!", Domain.Enums.NotificationType.TripCompleted, trip.Id, trip.DriverUid, trip.DriverName);
+                }
+            }
+            else if (status == TripStatus.Cancelled)
+            {
+                foreach (var uid in trip.ConfirmedPassengerUids)
+                {
+                    await _notifications.SendNotificationAsync(uid, "Viaje Cancelado", $"El conductor {trip.DriverName} ha cancelado el viaje.", Domain.Enums.NotificationType.TripCancelled, trip.Id, trip.DriverUid, trip.DriverName);
+                }
+            }
+        }
 
         return MapToDto(trip);
     }
@@ -145,6 +217,7 @@ public class TripService : ITripService
         if (dto.SeatsAvailable.HasValue) trip.SeatsAvailable = dto.SeatsAvailable.Value;
         if (dto.Price.HasValue) trip.Price = dto.Price.Value;
         if (dto.Notes is not null) trip.Notes = dto.Notes;
+        if (dto.RuleTexts is not null) trip.RuleTexts = dto.RuleTexts;
 
         if (dto.Vehicle is not null)
         {
@@ -184,6 +257,57 @@ public class TripService : ITripService
             throw new InvalidOperationException("Only open trips can be deleted.");
 
         _uow.Trips.Delete(trip);
+        await _uow.SaveChangesAsync();
+    }
+
+    public async Task CancelFutureTripsForUserAsync(string driverUid)
+    {
+        var activeTrips = await _uow.Trips.GetActiveByDriverUidAsync(driverUid);
+        var futureOpenTrips = activeTrips.Where(t => 
+            t.Status == TripStatus.Open && 
+            t.DepartureAt > DateTime.UtcNow).ToList();
+
+        if (!futureOpenTrips.Any()) return;
+
+        foreach (var trip in futureOpenTrips)
+        {
+            trip.Status = TripStatus.Cancelled;
+            _uow.Trips.Update(trip);
+            
+            // Notificar a pasajeros confirmados
+            if (trip.ConfirmedPassengerUids != null)
+            {
+                foreach (var passengerUid in trip.ConfirmedPassengerUids)
+            {
+                await _notifications.SendNotificationAsync(
+                    passengerUid, 
+                    "Viaje Cancelado", 
+                    $"El viaje con {trip.DriverName} ha sido cancelado automáticamente por el sistema.", 
+                    Domain.Enums.NotificationType.TripCancelled, 
+                    trip.Id, 
+                    trip.DriverUid, 
+                    trip.DriverName);
+                }
+            }
+            
+            // También deberíamos cancelar/rechazar solicitudes pendientes si las hubiera
+            var pendingRequests = await _uow.TripRequests.GetByTripIdAsync(trip.Id);
+            foreach (var req in pendingRequests.Where(r => r.Status == RequestStatus.Pending))
+            {
+                req.Status = RequestStatus.Rejected;
+                _uow.TripRequests.Update(req);
+                
+                await _notifications.SendNotificationAsync(
+                    req.PassengerUid,
+                    "Solicitud rechazada",
+                    $"El viaje de {trip.DriverName} ha sido cancelado.",
+                    NotificationType.TripRejected,
+                    trip.Id,
+                    trip.DriverUid,
+                    trip.DriverName);
+            }
+        }
+
         await _uow.SaveChangesAsync();
     }
 
@@ -276,6 +400,7 @@ public class TripService : ITripService
         Notes = trip.Notes,
         Status = trip.Status.ToString().ToLowerInvariant(),
         ConfirmedPassengerUids = trip.ConfirmedPassengerUids,
+        RuleTexts = trip.RuleTexts,
         Vehicle = new VehicleInfoDto
         {
             Plate = trip.Vehicle.Plate,

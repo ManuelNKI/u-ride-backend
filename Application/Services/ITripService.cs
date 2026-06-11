@@ -9,9 +9,11 @@ public interface ITripService
     Task<TripDto?> GetByIdAsync(Guid id);
     Task<PagedResultDto<TripDto>> SearchTripsAsync(TripSearchDto search);
     Task<List<TripDto>> GetDriverTripsAsync(string driverUid);
+    Task<List<TripDto>> GetActiveTripsAsync(string driverUid);
     Task<TripDto> UpdateStatusAsync(Guid tripId, string driverUid, string newStatus);
     Task<TripDto> UpdateTripAsync(Guid tripId, string driverUid, UpdateTripDto dto);
     Task DeleteTripAsync(Guid tripId, string driverUid);
+    Task CancelFutureTripsForUserAsync(string driverUid);
 
     // ──── Rutas admin ────
     Task<List<TripRouteDto>> GetAllRoutesAsync();
@@ -24,6 +26,19 @@ public interface ITripService
     Task<TripRuleDto> CreateRuleAsync(string text);
     Task<TripRuleDto> UpdateRuleAsync(Guid id, string text);
     Task DeleteRuleAsync(Guid id);
+
+    // ──── Tracking ────
+    void SetDriverLiveLocation(Guid tripId, DriverLocationDto location);
+    DriverLocationDto? GetDriverLiveLocation(Guid tripId);
+}
+
+public class DriverLocationDto
+{
+    public string DriverUid { get; set; } = null!;
+    public double Lat { get; set; }
+    public double Lng { get; set; }
+    public bool Active { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }
 
 // ──── DTOs para rutas y reglas ────

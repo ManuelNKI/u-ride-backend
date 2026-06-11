@@ -9,15 +9,30 @@ namespace Infrastructure.Services;
 public class TripRequestService : ITripRequestService
 {
     private readonly IUnitOfWork _uow;
+    private readonly INotificationService _notifications;
 
-    public TripRequestService(IUnitOfWork uow)
+    public TripRequestService(IUnitOfWork uow, INotificationService notifications)
     {
         _uow = uow;
+        _notifications = notifications;
     }
 
     public async Task<TripRequestDto> CreateRequestAsync(
         string passengerUid, string passengerName, CreateTripRequestDto dto)
     {
+        var passenger = await _uow.Users.GetByUidAsync(passengerUid) 
+            ?? throw new InvalidOperationException("Passenger not found.");
+
+        if (passenger.SuspendedUntil.HasValue && passenger.SuspendedUntil.Value > DateTime.UtcNow)
+        {
+            throw new InvalidOperationException($"Tu cuenta está suspendida hasta {passenger.SuspendedUntil.Value:dd/MM/yyyy HH:mm} UTC y no puedes solicitar viajes.");
+        }
+
+        if (passenger.Disabled)
+        {
+            throw new InvalidOperationException("Tu cuenta está desactivada y no puedes solicitar viajes.");
+        }
+
         var trip = await _uow.Trips.GetByIdAsync(dto.TripId)
             ?? throw new KeyNotFoundException($"Trip {dto.TripId} not found.");
 
@@ -43,6 +58,26 @@ public class TripRequestService : ITripRequestService
         await _uow.TripRequests.AddAsync(request);
         await _uow.SaveChangesAsync();
 
+        // Notificar al conductor: nueva solicitud recibida.
+        // Nota: enviamos tripId para que en frontend (rol conductor) navegue a /app/requests/:tripId.
+        await TrySendAsync(
+            trip.DriverUid,
+            title: "Nueva solicitud de viaje",
+            message: $"{passengerName} solicitó unirse a tu viaje ({trip.OriginZone} → {trip.DestinationZone}).",
+            type: NotificationType.System,
+            tripId: trip.Id);
+
+        // (Opcional) Notificar al pasajero que su solicitud fue enviada.
+        // Mantiene coherencia para cuando el usuario está en rol pasajero.
+        await TrySendAsync(
+            passengerUid,
+            title: "Solicitud enviada",
+            message: $"Tu solicitud para el viaje de {trip.DriverName} fue enviada.",
+            type: NotificationType.System,
+            tripId: trip.Id,
+            driverUid: trip.DriverUid,
+            driverName: trip.DriverName);
+
         return MapToDto(request);
     }
 
@@ -57,6 +92,16 @@ public class TripRequestService : ITripRequestService
 
         if (request.Trip.DriverUid != driverUid)
             throw new UnauthorizedAccessException("Only the driver can accept requests.");
+
+        var driver = await _uow.Users.GetByUidAsync(driverUid);
+        if (driver?.SuspendedUntil.HasValue == true && driver.SuspendedUntil.Value > DateTime.UtcNow)
+        {
+            throw new InvalidOperationException($"Tu cuenta está suspendida hasta {driver.SuspendedUntil.Value:dd/MM/yyyy HH:mm} UTC y no puedes aceptar solicitudes.");
+        }
+        if (driver?.Disabled == true)
+        {
+            throw new InvalidOperationException("Tu cuenta está desactivada y no puedes aceptar solicitudes.");
+        }
 
         if (request.Status != RequestStatus.Pending)
             throw new InvalidOperationException($"Request is already {request.Status}.");
@@ -81,11 +126,22 @@ public class TripRequestService : ITripRequestService
             _uow.Users.Update(passenger);
         }
 
-        // Si no quedan asientos, cerrar el viaje automáticamente
-        if (request.Trip.SeatsAvailable == 0)
-            request.Trip.Status = TripStatus.Closed;
+        // NOTA: No se cierra el viaje automáticamente cuando se llenan los cupos.
+        // El viaje permanece Open hasta que el conductor lo complete o cancele manualmente.
+        // El guard en CreateRequestAsync (SeatsAvailable <= 0) ya impide nuevas solicitudes.
 
         await _uow.SaveChangesAsync();
+
+        // Notificar al pasajero: solicitud aceptada.
+        await TrySendAsync(
+            request.PassengerUid,
+            title: "Solicitud aceptada",
+            message: $"{request.Trip.DriverName} aceptó tu solicitud. Ya puedes coordinar tu viaje.",
+            type: NotificationType.TripAccepted,
+            tripId: request.Trip.Id,
+            driverUid: request.Trip.DriverUid,
+            driverName: request.Trip.DriverName);
+
         return MapToDto(request);
     }
 
@@ -100,9 +156,29 @@ public class TripRequestService : ITripRequestService
         if (request.Status != RequestStatus.Pending)
             throw new InvalidOperationException($"Request is already {request.Status}.");
 
+        var driver = await _uow.Users.GetByUidAsync(driverUid);
+        if (driver?.SuspendedUntil.HasValue == true && driver.SuspendedUntil.Value > DateTime.UtcNow)
+        {
+            throw new InvalidOperationException($"Tu cuenta está suspendida hasta {driver.SuspendedUntil.Value:dd/MM/yyyy HH:mm} UTC y no puedes rechazar solicitudes.");
+        }
+        if (driver?.Disabled == true)
+        {
+            throw new InvalidOperationException("Tu cuenta está desactivada y no puedes rechazar solicitudes.");
+        }
+
         request.Status = RequestStatus.Rejected;
         _uow.TripRequests.Update(request);
         await _uow.SaveChangesAsync();
+
+        // Notificar al pasajero: solicitud rechazada.
+        await TrySendAsync(
+            request.PassengerUid,
+            title: "Solicitud rechazada",
+            message: $"{request.Trip.DriverName} rechazó tu solicitud.",
+            type: NotificationType.TripRejected,
+            tripId: request.Trip.Id,
+            driverUid: request.Trip.DriverUid,
+            driverName: request.Trip.DriverName);
 
         return MapToDto(request);
     }
@@ -134,7 +210,63 @@ public class TripRequestService : ITripRequestService
         _uow.TripRequests.Update(request);
         await _uow.SaveChangesAsync();
 
+        // Notificar al conductor: el pasajero canceló su solicitud.
+        await TrySendAsync(
+            request.Trip.DriverUid,
+            title: "Solicitud cancelada",
+            message: $"{request.PassengerName} canceló su solicitud para tu viaje.",
+            type: NotificationType.System,
+            tripId: request.Trip.Id);
+
         return MapToDto(request);
+    }
+
+    public async Task<TripRequestDto> PayRequestAsync(Guid requestId, string passengerUid)
+    {
+        var request = await _uow.TripRequests.GetByIdAsync(requestId)
+            ?? throw new KeyNotFoundException("Solicitud no encontrada.");
+
+        if (request.PassengerUid != passengerUid)
+            throw new UnauthorizedAccessException("Solo el pasajero puede pagar su solicitud.");
+
+        if (request.Status != RequestStatus.Accepted)
+            throw new InvalidOperationException("Solo se pueden pagar solicitudes aceptadas.");
+
+        if (request.PaymentStatus == PaymentStatus.Paid)
+            throw new InvalidOperationException("Esta solicitud ya ha sido pagada.");
+
+        request.PaymentStatus = PaymentStatus.Paid;
+        _uow.TripRequests.Update(request);
+        await _uow.SaveChangesAsync();
+
+        // Notificar al conductor
+        await TrySendAsync(
+            request.Trip.DriverUid,
+            title: "Pago recibido",
+            message: $"{request.PassengerName} ha pagado su cupo.",
+            type: NotificationType.System,
+            tripId: request.Trip.Id);
+
+        return MapToDto(request);
+    }
+
+    private async Task TrySendAsync(
+        string userUid,
+        string title,
+        string message,
+        NotificationType type,
+        Guid? tripId = null,
+        string? driverUid = null,
+        string? driverName = null)
+    {
+        await _notifications.SendNotificationAsync(
+            userUid,
+            title,
+            message,
+            type,
+            tripId,
+            driverUid,
+            driverName);
     }
 
     public async Task<List<TripRequestDto>> GetByTripIdAsync(Guid tripId)

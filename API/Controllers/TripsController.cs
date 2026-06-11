@@ -71,6 +71,18 @@ public class TripsController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene los viajes activos (pending o in_progress) del conductor autenticado.
+    /// </summary>
+    [HttpGet("active")]
+    [Authorize]
+    public async Task<ActionResult<List<TripDto>>> GetActiveTrips()
+    {
+        var uid = GetFirebaseUid();
+        var trips = await _tripService.GetActiveTripsAsync(uid);
+        return Ok(trips);
+    }
+
+    /// <summary>
     /// Actualiza el estado de un viaje (solo el conductor).
     /// </summary>
     [HttpPatch("{id:guid}/status")]
@@ -106,6 +118,37 @@ public class TripsController : ControllerBase
         var uid = GetFirebaseUid();
         await _tripService.DeleteTripAsync(id, uid);
         return NoContent();
+    }
+
+    // ═══════════════════ TRACKING ═══════════════════
+
+    /// <summary>
+    /// Actualiza la ubicación en tiempo real del conductor.
+    /// </summary>
+    [HttpPost("{id:guid}/live-location")]
+    [Authorize]
+    public IActionResult SetLiveLocation(Guid id, [FromBody] DriverLocationDto location)
+    {
+        var uid = GetFirebaseUid();
+        if (location.DriverUid != uid)
+            return Forbid();
+
+        _tripService.SetDriverLiveLocation(id, location);
+        return Ok();
+    }
+
+    /// <summary>
+    /// Obtiene la ubicación en tiempo real del conductor.
+    /// </summary>
+    [HttpGet("{id:guid}/live-location")]
+    [Authorize]
+    public ActionResult<DriverLocationDto> GetLiveLocation(Guid id)
+    {
+        var loc = _tripService.GetDriverLiveLocation(id);
+        if (loc is null)
+            return NoContent();
+
+        return Ok(loc);
     }
 
     // ═══════════════════ ROUTES (Admin) ═══════════════════

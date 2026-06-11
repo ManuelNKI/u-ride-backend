@@ -1,0 +1,17 @@
+﻿C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\AuditableEntity.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\Notification.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\Report.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\Review.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\Trip.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\TripRequest.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\TripRoute.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\TripRule.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\TripRules.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\User.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Entities\VehicleInfo.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Enums\NotificationType.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Enums\PaymentStatus.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Enums\ReportAction.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Enums\ReportStatus.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Enums\RequestStatus.cs
+C:\Users\ramir\AngularApps\Proyecto GPIS\u-ride-backend\Domain\Enums\TripStatus.cs

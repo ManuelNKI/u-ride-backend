@@ -69,7 +69,7 @@ public class UsersController : ControllerBase
     /// </summary>
     [HttpPut("me")]
     [Authorize]
-    public async Task<ActionResult<UserProfileDto>> UpdateProfile([FromBody] SyncUserDto dto)
+    public async Task<ActionResult<UserProfileDto>> UpdateProfile([FromBody] UpdateProfileDto dto)
     {
         var uid = GetFirebaseUid();
         var profile = await _userService.UpdateProfileAsync(uid, dto);
@@ -97,7 +97,7 @@ public class UsersController : ControllerBase
     [HttpPut("{uid}")]
     [Authorize]
     public async Task<ActionResult<UserProfileDto>> AdminUpdateProfile(
-        string uid, [FromBody] SyncUserDto dto)
+        string uid, [FromBody] UpdateProfileDto dto)
     {
         var profile = await _userService.AdminUpdateProfileAsync(uid, dto);
         return Ok(profile);
@@ -123,6 +123,17 @@ public class UsersController : ControllerBase
     {
         await _userService.SuspendUserAsync(uid, request.Until);
         return Ok(new { message = $"User {uid} suspended until {request.Until:u}" });
+    }
+
+    /// <summary>
+    /// [Admin] Levanta la suspensión de un usuario.
+    /// </summary>
+    [HttpPost("{uid}/unsuspend")]
+    [Authorize]
+    public async Task<IActionResult> UnsuspendUser(string uid)
+    {
+        await _userService.UnsuspendUserAsync(uid);
+        return Ok(new { message = $"User {uid} suspension lifted." });
     }
 
     // ──── Helper: Extraer FirebaseUid del token JWT ────

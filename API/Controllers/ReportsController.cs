@@ -26,8 +26,32 @@ public class ReportsController : ControllerBase
     public async Task<ActionResult<ReportDto>> Create([FromBody] CreateReportDto dto)
     {
         var uid = GetFirebaseUid();
-        var report = await _reportService.CreateReportAsync(uid, dto);
-        return Created(string.Empty, report);
+        try
+        {
+            var report = await _reportService.CreateReportAsync(uid, dto);
+            return Created(string.Empty, report);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(ex.Message);
+        }
+    }
+
+    /// <summary>
+    /// Verifica si el usuario autenticado ya ha enviado un reporte para un viaje específico.
+    /// Si se provee reportedUid, verifica específicamente contra ese usuario.
+    /// GET /api/reports/has-reported?tripId={guid}&amp;reportedUid={uid}
+    /// </summary>
+    [HttpGet("has-reported")]
+    public async Task<ActionResult<bool>> HasReported([FromQuery] Guid tripId, [FromQuery] string? reportedUid = null)
+    {
+        var uid = GetFirebaseUid();
+        bool result;
+        if (!string.IsNullOrEmpty(reportedUid))
+            result = await _reportService.HasReportedUserForTripAsync(uid, tripId, reportedUid);
+        else
+            result = await _reportService.HasReportedForTripAsync(uid, tripId);
+        return Ok(result);
     }
 
     /// <summary>
@@ -48,8 +72,37 @@ public class ReportsController : ControllerBase
     public async Task<ActionResult<ReportDto>> Resolve(
         Guid id, [FromBody] ResolveReportRequest request)
     {
-        var report = await _reportService.ResolveReportAsync(id, request.Action, request.AdminNotes);
+        var report = await _reportService.ResolveReportAsync(id, request.Action, request.AdminNotes, request.SuspensionDays);
         return Ok(report);
+    }
+
+    /// <summary>
+    /// Sube una imagen de evidencia a Coolify (localmente en wwwroot/uploads).
+    /// </summary>
+    [HttpPost("upload-evidence")]
+    public async Task<IActionResult> UploadEvidence(IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest("No file uploaded.");
+
+        if (!file.ContentType.StartsWith("image/"))
+            return BadRequest("File is not an image.");
+
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "reports");
+        if (!Directory.Exists(uploadsFolder))
+            Directory.CreateDirectory(uploadsFolder);
+
+        var uniqueFileName = $"{Guid.NewGuid()}_{Path.GetFileName(file.FileName)}";
+        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        // Devolvemos la ruta relativa para accederla públicamente
+        var relativeUrl = $"/uploads/reports/{uniqueFileName}";
+        return Ok(new { evidenceUrl = relativeUrl });
     }
 
     private string GetFirebaseUid()
@@ -62,4 +115,5 @@ public class ResolveReportRequest
 {
     public string Action { get; set; } = null!;
     public string? AdminNotes { get; set; }
+    public int? SuspensionDays { get; set; }
 }
