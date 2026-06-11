@@ -1,2 +1,10 @@
 .git
 .vs
+[Bb]in/
+[Oo]bj/
+coveragereport/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+TestResults/
