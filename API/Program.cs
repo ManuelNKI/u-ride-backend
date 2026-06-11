@@ -6,6 +6,7 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+LoadEnv();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -143,5 +144,50 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+void LoadEnv()
+{
+    var root = System.IO.Directory.GetCurrentDirectory();
+    var envPath = System.IO.Path.Combine(root, ".env");
+    
+    if (!System.IO.File.Exists(envPath))
+    {
+        var baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+        envPath = System.IO.Path.Combine(baseDir, ".env");
+        
+        if (!System.IO.File.Exists(envPath))
+        {
+            var dir = new System.IO.DirectoryInfo(baseDir);
+            while (dir != null && !System.IO.File.Exists(System.IO.Path.Combine(dir.FullName, ".env")))
+            {
+                dir = dir.Parent;
+            }
+            if (dir != null)
+            {
+                envPath = System.IO.Path.Combine(dir.FullName, ".env");
+            }
+        }
+    }
+
+    if (!System.IO.File.Exists(envPath)) return;
+
+    foreach (var line in System.IO.File.ReadAllLines(envPath))
+    {
+        if (string.IsNullOrWhiteSpace(line) || line.StartsWith("#")) continue;
+
+        var parts = line.Split('=', 2);
+        if (parts.Length != 2) continue;
+
+        var key = parts[0].Trim();
+        var value = parts[1].Trim();
+
+        if ((value.StartsWith("\"") && value.EndsWith("\"")) || (value.StartsWith("'") && value.EndsWith("'")))
+        {
+            value = value[1..^1];
+        }
+
+        System.Environment.SetEnvironmentVariable(key, value);
+    }
+}
 
 public partial class Program { }
