@@ -3,6 +3,7 @@ namespace Application.DTOs.Appeals;
 public class CreateAppealDto
 {
     public string Reason { get; set; } = null!;
+    public string? EvidenceUrl { get; set; }
 }
 
 public class AppealResponseDto
@@ -12,6 +13,7 @@ public class AppealResponseDto
     public string UserName { get; set; } = null!;
     public string UserEmail { get; set; } = null!;
     public string Reason { get; set; } = null!;
+    public string? EvidenceUrl { get; set; }
     public string Status { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
     public DateTime? ProcessedAt { get; set; }

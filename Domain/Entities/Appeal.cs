@@ -15,6 +15,7 @@ public class Appeal : AuditableEntity
     public User User { get; set; } = null!;
 
     public string Reason { get; set; } = null!;
+    public string? EvidenceUrl { get; set; }
     
     public AppealStatus Status { get; set; }
 

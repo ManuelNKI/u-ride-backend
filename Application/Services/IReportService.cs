@@ -9,5 +9,5 @@ public interface IReportService
     Task<bool> HasReportedForTripAsync(string reporterUid, Guid tripId);
     Task<bool> HasReportedUserForTripAsync(string reporterUid, Guid tripId, string reportedUid);
     Task<PagedResultDto<ReportDto>> GetAllAsync(int page, int pageSize);
-    Task<ReportDto> ResolveReportAsync(Guid reportId, string action, string? adminNotes);
+    Task<ReportDto> ResolveReportAsync(Guid reportId, string action, string? adminNotes, int? suspensionDays = null);
 }

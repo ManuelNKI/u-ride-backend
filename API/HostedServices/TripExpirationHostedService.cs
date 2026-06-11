@@ -27,11 +27,10 @@ public class TripExpirationHostedService : BackgroundService
                 using var scope = _serviceProvider.CreateScope();
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 
-                // Expirar viajes no iniciados (Open) 1 hora después de departureAt
-                var expirationTime = DateTime.UtcNow.AddHours(-1);
-
+                // 1. Limpiar viajes "Olvidados" (Abiertos o Cerrados pero nunca iniciados)
+                var pendingThreshold = DateTime.UtcNow.AddHours(-1);
                 var expiredTrips = await context.Trips
-                    .Where(t => t.Status == TripStatus.Open && t.DepartureAt <= expirationTime)
+                    .Where(t => (t.Status == TripStatus.Open || t.Status == TripStatus.Closed) && t.DepartureAt <= pendingThreshold)
                     .ToListAsync(stoppingToken);
 
                 if (expiredTrips.Any())
@@ -49,9 +48,28 @@ public class TripExpirationHostedService : BackgroundService
                             request.Status = RequestStatus.Cancelled;
                         }
                     }
+                    _logger.LogInformation($"Expired {expiredTrips.Count} 'Forgotten' trips.");
+                }
 
+                // 2. Limpiar viajes "Fantasmas" (Iniciados pero nunca finalizados)
+                var inProgressThreshold = DateTime.UtcNow.AddHours(-5);
+                var stuckTrips = await context.Trips
+                    .Where(t => t.Status == TripStatus.InProgress && t.DepartureAt <= inProgressThreshold)
+                    .ToListAsync(stoppingToken);
+
+                if (stuckTrips.Any())
+                {
+                    foreach (var trip in stuckTrips)
+                    {
+                        trip.Status = TripStatus.Completed;
+                        // Aquí se podría disparar la lógica para notificar o cobrar si estuviera implementado
+                    }
+                    _logger.LogInformation($"Completed {stuckTrips.Count} 'Ghost' trips that were stuck in progress.");
+                }
+
+                if (expiredTrips.Any() || stuckTrips.Any())
+                {
                     await context.SaveChangesAsync(stoppingToken);
-                    _logger.LogInformation($"Expired {expiredTrips.Count} trips.");
                 }
             }
             catch (Exception ex)

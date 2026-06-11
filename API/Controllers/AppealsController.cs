@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using Application.DTOs.Appeals;
+using Application.Services;
 using Domain.Entities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
@@ -14,10 +15,12 @@ namespace API.Controllers;
 public class AppealsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly INotificationService _notificationService;
 
-    public AppealsController(ApplicationDbContext context)
+    public AppealsController(ApplicationDbContext context, INotificationService notificationService)
     {
         _context = context;
+        _notificationService = notificationService;
     }
 
     [HttpPost]
@@ -38,11 +41,28 @@ public class AppealsController : ControllerBase
         {
             UserId = uid,
             Reason = request.Reason,
+            EvidenceUrl = request.EvidenceUrl,
             Status = AppealStatus.Pending
         };
 
         _context.Appeals.Add(appeal);
         await _context.SaveChangesAsync();
+
+        // Notificar a todos los administradores
+        var adminUids = await _context.Users
+            .Where(u => u.IsAdmin)
+            .Select(u => u.FirebaseUid)
+            .ToListAsync();
+
+        foreach (var adminUid in adminUids)
+        {
+            await _notificationService.SendNotificationAsync(
+                userUid: adminUid,
+                title: "Nueva Apelación",
+                message: $"El usuario {user.DisplayName} ha enviado una apelación de suspensión.",
+                type: Domain.Enums.NotificationType.System
+            );
+        }
 
         return Ok(new { message = "Apelación enviada correctamente." });
     }
@@ -62,6 +82,7 @@ public class AppealsController : ControllerBase
                 UserName = a.User.DisplayName,
                 UserEmail = a.User.Email,
                 Reason = a.Reason,
+                EvidenceUrl = a.EvidenceUrl,
                 Status = a.Status.ToString().ToLower(),
                 CreatedAt = a.CreatedAt,
                 ProcessedAt = a.ProcessedAt,
@@ -90,6 +111,7 @@ public class AppealsController : ControllerBase
                 UserName = a.User.DisplayName,
                 UserEmail = a.User.Email,
                 Reason = a.Reason,
+                EvidenceUrl = a.EvidenceUrl,
                 Status = a.Status.ToString().ToLower(),
                 CreatedAt = a.CreatedAt,
                 ProcessedAt = a.ProcessedAt,

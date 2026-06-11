@@ -9,9 +9,11 @@ public interface ITripService
     Task<TripDto?> GetByIdAsync(Guid id);
     Task<PagedResultDto<TripDto>> SearchTripsAsync(TripSearchDto search);
     Task<List<TripDto>> GetDriverTripsAsync(string driverUid);
+    Task<List<TripDto>> GetActiveTripsAsync(string driverUid);
     Task<TripDto> UpdateStatusAsync(Guid tripId, string driverUid, string newStatus);
     Task<TripDto> UpdateTripAsync(Guid tripId, string driverUid, UpdateTripDto dto);
     Task DeleteTripAsync(Guid tripId, string driverUid);
+    Task CancelFutureTripsForUserAsync(string driverUid);
 
     // ──── Rutas admin ────
     Task<List<TripRouteDto>> GetAllRoutesAsync();

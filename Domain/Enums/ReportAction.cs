@@ -4,5 +4,6 @@ public enum ReportAction
 {
     None,
     Warned,
-    Suspended
+    Suspended,
+    Dismissed
 }

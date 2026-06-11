@@ -11,12 +11,14 @@ public class UserService : IUserService
     private readonly IUnitOfWork _uow;
     private readonly ICloudinaryService _cloudinary;
     private readonly INotificationService _notificationService;
+    private readonly ITripService _tripService;
 
-    public UserService(IUnitOfWork uow, ICloudinaryService cloudinary, INotificationService notificationService)
+    public UserService(IUnitOfWork uow, ICloudinaryService cloudinary, INotificationService notificationService, ITripService tripService)
     {
         _uow = uow;
         _cloudinary = cloudinary;
         _notificationService = notificationService;
+        _tripService = tripService;
     }
 
     /// <summary>
@@ -170,6 +172,7 @@ public class UserService : IUserService
         }
 
         await _uow.SaveChangesAsync();
+        await _tripService.CancelFutureTripsForUserAsync(firebaseUid);
     }
 
     public async Task UnsuspendUserAsync(string firebaseUid)

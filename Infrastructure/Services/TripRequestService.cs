@@ -156,6 +156,16 @@ public class TripRequestService : ITripRequestService
         if (request.Status != RequestStatus.Pending)
             throw new InvalidOperationException($"Request is already {request.Status}.");
 
+        var driver = await _uow.Users.GetByUidAsync(driverUid);
+        if (driver?.SuspendedUntil.HasValue == true && driver.SuspendedUntil.Value > DateTime.UtcNow)
+        {
+            throw new InvalidOperationException($"Tu cuenta está suspendida hasta {driver.SuspendedUntil.Value:dd/MM/yyyy HH:mm} UTC y no puedes rechazar solicitudes.");
+        }
+        if (driver?.Disabled == true)
+        {
+            throw new InvalidOperationException("Tu cuenta está desactivada y no puedes rechazar solicitudes.");
+        }
+
         request.Status = RequestStatus.Rejected;
         _uow.TripRequests.Update(request);
         await _uow.SaveChangesAsync();

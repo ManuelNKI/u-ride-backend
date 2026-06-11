@@ -11,11 +11,13 @@ public class ReportService : IReportService
 {
     private readonly IUnitOfWork _uow;
     private readonly INotificationService _notificationService;
+    private readonly ITripService _tripService;
 
-    public ReportService(IUnitOfWork uow, INotificationService notificationService)
+    public ReportService(IUnitOfWork uow, INotificationService notificationService, ITripService tripService)
     {
         _uow = uow;
         _notificationService = notificationService;
+        _tripService = tripService;
     }
 
     public async Task<ReportDto> CreateReportAsync(string reporterUid, CreateReportDto dto)
@@ -86,7 +88,7 @@ public class ReportService : IReportService
     /// <summary>
     /// Resuelve un reporte, aplica la acción y opcionalmente suspende al usuario.
     /// </summary>
-    public async Task<ReportDto> ResolveReportAsync(Guid reportId, string action, string? adminNotes)
+    public async Task<ReportDto> ResolveReportAsync(Guid reportId, string action, string? adminNotes, int? suspensionDays = null)
     {
         var report = await _uow.Reports.GetByIdAsync(reportId)
             ?? throw new KeyNotFoundException($"Report {reportId} not found.");
@@ -105,7 +107,15 @@ public class ReportService : IReportService
             var user = await _uow.Users.GetByUidAsync(report.ReportedUid);
             if (user is not null)
             {
-                user.SuspendedUntil = DateTime.UtcNow.AddDays(7); // Suspensión de 7 días por defecto
+                int days = suspensionDays ?? 7;
+                var newSuspensionDate = DateTime.UtcNow.AddDays(days);
+                
+                // Solo actualizar si la nueva suspensión es mayor a la existente
+                if (!user.SuspendedUntil.HasValue || newSuspensionDate > user.SuspendedUntil.Value)
+                {
+                    user.SuspendedUntil = newSuspensionDate;
+                }
+                
                 _uow.Users.Update(user);
 
                 var openReports = await _uow.Reports.GetByReportedUidAsync(report.ReportedUid);
@@ -121,9 +131,12 @@ public class ReportService : IReportService
             await _notificationService.SendNotificationAsync(
                 userUid: report.ReportedUid,
                 title: "Cuenta Suspendida",
-                message: "Tu cuenta ha sido suspendida por 7 días debido a un reporte en tu contra.",
+                message: $"Tu cuenta ha sido suspendida por {(suspensionDays ?? 7)} días debido a un reporte en tu contra.",
                 type: NotificationType.System
             );
+            
+            // Tip de negocio: Cancelar viajes futuros automáticamente para liberar pasajeros
+            await _tripService.CancelFutureTripsForUserAsync(report.ReportedUid);
         }
         else if (reportAction == ReportAction.Warned)
         {
@@ -160,6 +173,8 @@ public class ReportService : IReportService
                     message: $"Has acumulado {recentWarnings} advertencias en el último mes. Tu cuenta ha sido suspendida por 7 días automáticamente.",
                     type: NotificationType.System
                 );
+                
+                await _tripService.CancelFutureTripsForUserAsync(report.ReportedUid);
             }
             else
             {

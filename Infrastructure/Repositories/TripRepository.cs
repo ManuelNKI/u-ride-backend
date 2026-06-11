@@ -52,6 +52,13 @@ public class TripRepository : ITripRepository
             .AsNoTracking()
             .ToListAsync();
 
+    public async Task<List<Trip>> GetActiveByDriverUidAsync(string driverUid)
+        => await _context.Trips
+            .Where(t => t.DriverUid == driverUid && (t.Status == TripStatus.Open || t.Status == TripStatus.InProgress))
+            .OrderBy(t => t.DepartureAt)
+            .AsNoTracking()
+            .ToListAsync();
+
     public async Task AddAsync(Trip trip)
         => await _context.Trips.AddAsync(trip);
 

@@ -71,6 +71,18 @@ public class TripsController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene los viajes activos (pending o in_progress) del conductor autenticado.
+    /// </summary>
+    [HttpGet("active")]
+    [Authorize]
+    public async Task<ActionResult<List<TripDto>>> GetActiveTrips()
+    {
+        var uid = GetFirebaseUid();
+        var trips = await _tripService.GetActiveTripsAsync(uid);
+        return Ok(trips);
+    }
+
+    /// <summary>
     /// Actualiza el estado de un viaje (solo el conductor).
     /// </summary>
     [HttpPatch("{id:guid}/status")]
@@ -134,7 +146,7 @@ public class TripsController : ControllerBase
     {
         var loc = _tripService.GetDriverLiveLocation(id);
         if (loc is null)
-            return NotFound();
+            return NoContent();
 
         return Ok(loc);
     }

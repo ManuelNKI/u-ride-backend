@@ -72,7 +72,7 @@ public class ReportsController : ControllerBase
     public async Task<ActionResult<ReportDto>> Resolve(
         Guid id, [FromBody] ResolveReportRequest request)
     {
-        var report = await _reportService.ResolveReportAsync(id, request.Action, request.AdminNotes);
+        var report = await _reportService.ResolveReportAsync(id, request.Action, request.AdminNotes, request.SuspensionDays);
         return Ok(report);
     }
 
@@ -115,4 +115,5 @@ public class ResolveReportRequest
 {
     public string Action { get; set; } = null!;
     public string? AdminNotes { get; set; }
+    public int? SuspensionDays { get; set; }
 }
