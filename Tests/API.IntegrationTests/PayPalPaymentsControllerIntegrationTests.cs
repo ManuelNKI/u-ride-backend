@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,6 +24,7 @@ public class PayPalPaymentsControllerIntegrationTests : IClassFixture<TestWebApp
     private readonly TestWebApplicationFactory _factory;
     private readonly Mock<IPayPalCheckoutService> _payPalMock = new();
     private readonly Mock<INotificationService> _notificationsMock = new();
+    private WebApplicationFactory<Program> _customFactory = null!;
 
     public PayPalPaymentsControllerIntegrationTests(TestWebApplicationFactory factory)
     {
@@ -32,19 +33,21 @@ public class PayPalPaymentsControllerIntegrationTests : IClassFixture<TestWebApp
 
     private HttpClient CreateClientWithUid(string uid)
     {
-        var client = _factory.WithWebHostBuilder(builder =>
+        _customFactory = _factory.WithWebHostBuilder(builder =>
         {
             builder.ConfigureServices(services =>
             {
-                var paypalDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(IPayPalCheckoutService));
-                if (paypalDescriptor != null) services.Remove(paypalDescriptor);
+                var paypalDescriptors = services.Where(d => d.ServiceType == typeof(IPayPalCheckoutService)).ToList();
+                foreach (var desc in paypalDescriptors) services.Remove(desc);
                 services.AddScoped(_ => _payPalMock.Object);
 
-                var notifDescriptor = services.SingleOrDefault(d => d.ServiceType == typeof(INotificationService));
-                if (notifDescriptor != null) services.Remove(notifDescriptor);
+                var notifDescriptors = services.Where(d => d.ServiceType == typeof(INotificationService)).ToList();
+                foreach (var desc in notifDescriptors) services.Remove(desc);
                 services.AddScoped(_ => _notificationsMock.Object);
             });
-        }).CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
+        });
+
+        var client = _customFactory.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
 
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(TestAuthHandler.SchemeName);
         client.DefaultRequestHeaders.Add("X-Test-Uid", uid);
@@ -74,6 +77,20 @@ public class PayPalPaymentsControllerIntegrationTests : IClassFixture<TestWebApp
         var dto = new CreateOrderDto { TripRequestId = tripRequestId };
 
         // Act
+        using (var scope = _customFactory.Services.CreateScope())
+        {
+            var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var seededReq = await db.TripRequests.FindAsync(tripRequestId);
+            if (seededReq == null)
+            {
+                throw new Exception("DEBUG: Seeded TripRequest not found in database!");
+            }
+            else if (seededReq.Status != RequestStatus.Accepted)
+            {
+                throw new Exception($"DEBUG: Seeded TripRequest status is {seededReq.Status} instead of Accepted! Trip ID is {seededReq.TripId}, passenger UID is {seededReq.PassengerUid}");
+            }
+        }
+
         var response = await client.PostAsJsonAsync("/api/payments/paypal/orders", dto);
 
         // Assert
@@ -144,7 +161,7 @@ public class PayPalPaymentsControllerIntegrationTests : IClassFixture<TestWebApp
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
 
         // Validar base de datos limpia limpiando los estados cacheados en el tracker del test
-        using var scope = _factory.Services.CreateScope();
+        using var scope = _customFactory.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         db.ChangeTracker.Clear(); // ◄ CLAVE: Rompe la caché de lectura para obligar a consultar el cambio real
 
@@ -160,11 +177,33 @@ public class PayPalPaymentsControllerIntegrationTests : IClassFixture<TestWebApp
     private async Task SeedTripRequestWithIdsAsync(
         Guid requestId, Guid tripId, string passengerUid, RequestStatus status, PaymentStatus paymentStatus, decimal price, string driverUid = "some_driver")
     {
-        using var scope = _factory.Services.CreateScope();
+        using var scope = _customFactory.Services.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
         // Limpiamos cambios previos por si acaso
         db.ChangeTracker.Clear();
+
+        if (await db.Users.FindAsync(passengerUid) is null)
+        {
+            db.Users.Add(new User
+            {
+                FirebaseUid = passengerUid,
+                Email = $"{passengerUid}@u-ride.test",
+                DisplayName = "Pasajero de Prueba",
+                EmailVerified = true
+            });
+        }
+
+        if (await db.Users.FindAsync(driverUid) is null)
+        {
+            db.Users.Add(new User
+            {
+                FirebaseUid = driverUid,
+                Email = $"{driverUid}@u-ride.test",
+                DisplayName = "System Driver",
+                EmailVerified = true
+            });
+        }
 
         var trip = new Trip
         {
@@ -175,7 +214,8 @@ public class PayPalPaymentsControllerIntegrationTests : IClassFixture<TestWebApp
             RouteName = "Ambato - Quito",
             PaymentMethod = "PayPal",
             OriginZone = "Ficoa",
-            DestinationZone = "La Carolina"
+            DestinationZone = "La Carolina",
+            DepartureAt = DateTime.UtcNow.AddDays(1)
         };
 
         var request = new TripRequest

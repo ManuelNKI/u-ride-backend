@@ -17,6 +17,7 @@ namespace Application.Tests.Services
         private readonly Mock<IUserRepository> _userRepoMock;
         private readonly Mock<ICloudinaryService> _cloudinaryMock;
         private readonly Mock<INotificationService> _notificationMock;
+        private readonly Mock<ITripService> _tripServiceMock;
         private readonly UserService _userService;
 
         public UserServiceTests()
@@ -25,8 +26,9 @@ namespace Application.Tests.Services
             _userRepoMock = new Mock<IUserRepository>();
             _cloudinaryMock = new Mock<ICloudinaryService>();
             _notificationMock = new Mock<INotificationService>();
+            _tripServiceMock = new Mock<ITripService>();
             _uowMock.Setup(u => u.Users).Returns(_userRepoMock.Object);
-            _userService = new UserService(_uowMock.Object, _cloudinaryMock.Object, _notificationMock.Object);
+            _userService = new UserService(_uowMock.Object, _cloudinaryMock.Object, _notificationMock.Object, _tripServiceMock.Object);
         }
 
 

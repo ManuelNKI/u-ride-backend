@@ -21,9 +21,6 @@ builder.Services.AddHttpClient<IPayPalCheckoutService, PayPalCheckoutService>();
 // Hosted Services
 builder.Services.AddHostedService<API.HostedServices.TripExpirationHostedService>();
 
-// PayPal (Checkout / Orders API)
-builder.Services.AddHttpClient<IPayPalCheckoutService, PayPalCheckoutService>();
-
 // Controllers + JSON camelCase + enum como string
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

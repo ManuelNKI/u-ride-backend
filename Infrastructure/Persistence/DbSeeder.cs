@@ -21,9 +21,18 @@ public static class DbSeeder
 
         try
         {
-            // Aplicar migraciones pendientes
-            await context.Database.MigrateAsync();
-            logger.LogInformation("Database migrated successfully.");
+            if (context.Database.IsRelational())
+            {
+                // Aplicar migraciones pendientes
+                await context.Database.MigrateAsync();
+                logger.LogInformation("Database migrated successfully.");
+            }
+            else
+            {
+                // Crear base de datos para entornos no relacionales (InMemory)
+                await context.Database.EnsureCreatedAsync();
+                logger.LogInformation("In-memory database created.");
+            }
 
             await SeedRoutesAsync(context, logger);
             await SeedRulesAsync(context, logger);
