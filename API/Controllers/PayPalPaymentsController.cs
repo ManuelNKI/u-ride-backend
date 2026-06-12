@@ -62,20 +62,39 @@ public class PayPalPaymentsController : ControllerBase
         var returnUrl = $"{apiBase}/api/payments/paypal/return?tripRequestId={request.Id}";
         var cancelUrl = $"{apiBase}/api/payments/paypal/cancel?tripRequestId={request.Id}";
 
-        var result = await _payPal.CreateOrderAsync(new PayPalCreateOrderRequest(
-            AmountValue: amountStr,
-            CurrencyCode: "USD",
-            ReturnUrl: returnUrl,
-            CancelUrl: cancelUrl,
-            CustomId: request.Id.ToString(),
-            ReferenceId: request.TripId.ToString(),
-            Description: "U-Ride - Pago de viaje"));
-
-        return Ok(new CreateOrderResponse
+        try
         {
-            OrderId = result.OrderId,
-            ApproveUrl = result.ApproveUrl,
-        });
+            var result = await _payPal.CreateOrderAsync(new PayPalCreateOrderRequest(
+                AmountValue: amountStr,
+                CurrencyCode: "USD",
+                ReturnUrl: returnUrl,
+                CancelUrl: cancelUrl,
+                CustomId: request.Id.ToString(),
+                ReferenceId: $"{request.Id}-{Guid.NewGuid().ToString()[..8]}", // Asegurando id único
+                Description: "U-Ride - Pago de viaje"));
+
+            return Ok(new CreateOrderResponse
+            {
+                OrderId = result.OrderId,
+                ApproveUrl = result.ApproveUrl,
+            });
+        }
+        catch (HttpRequestException ex)
+        {
+            // Capturamos el error HTTP del servicio y se lo escupimos directo al cliente
+            return StatusCode(400, new { 
+                error = "PayPal_Validation_Failed", 
+                message = ex.Message 
+            });
+        }
+        catch (Exception ex)
+        {
+            // Cualquier otro error inesperado
+            return StatusCode(500, new { 
+                error = "Internal_Error", 
+                message = ex.Message 
+            });
+        }
     }
 
     // PayPal redirects the browser here after approval

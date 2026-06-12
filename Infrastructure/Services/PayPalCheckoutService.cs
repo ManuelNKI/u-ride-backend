@@ -55,7 +55,7 @@ public sealed class PayPalCheckoutService : IPayPalCheckoutService
                     amount = new
                     {
                         currency_code = request.CurrencyCode,
-                        value = request.AmountValue,
+                        value = request.AmountValue.ToString(),
                     },
                     custom_id = request.CustomId,
                     reference_id = request.ReferenceId,
@@ -77,8 +77,12 @@ public sealed class PayPalCheckoutService : IPayPalCheckoutService
 
         if (!resp.IsSuccessStatusCode)
         {
-            _logger.LogWarning("PayPal create order failed: {StatusCode} {Body}", (int)resp.StatusCode, Truncate(body));
-            throw new InvalidOperationException("No se pudo crear la orden de PayPal.");
+            // 1. Guardamos el error detallado en los logs del servidor
+            _logger.LogError("PayPal API Error en Producción: Código HTTP {StatusCode}. Respuesta: {Body}", (int)resp.StatusCode, body);
+            
+            // 2. IMPORTANTE: Lanzamos una excepción que contenga la respuesta REAL de PayPal
+            // Puedes deserializarla o enviarla directamente como mensaje para que tu API la exponga
+            throw new HttpRequestException($"PayPal rechazó la solicitud: {body}", null, resp.StatusCode);
         }
 
         using var doc = JsonDocument.Parse(body);
@@ -244,7 +248,7 @@ public sealed class PayPalCheckoutService : IPayPalCheckoutService
 
     private sealed class PayPalOptions
     {
-        public string BaseUrl { get; set; } = "https://api-m.sandbox.paypal.com";
+        public string BaseUrl { get; set; } = "https://api-m.paypal.com";
         public string? ClientId { get; set; }
         public string? ClientSecret { get; set; }
     }
